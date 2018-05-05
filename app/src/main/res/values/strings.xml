@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Prolink Simulador</string>
+    <string-array name="franquias_array">
+        <item>Escolha uma franquia</item>
+        <item>Franquia 1</item>
+        <item>Franquia 1</item>
+        <item>Franquia 2</item>
+        <item>Franquia 3</item>
+        <item>Franquia 4</item>
+        <item>Franquia 5</item>
+        <item>Franquia 6</item>
+        <item>Franquia 7</item>
+        <item>Franquia 8</item>
+    </string-array>
+</resources>
