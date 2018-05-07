@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">Prolink Simulador</string>
+    <string name="button_avancar">Avançar</string>
+    <!-- Menu Inicial-->
+    <string name="descricao_main"></string>
+    <string name="button_iniciar_simulacao">Iniciar Simulação</string>
+
+    <!--Area Cadastral -->
+    <string name="descricao_cadastro">Complete o cadastro abaixo para ter acesso a simulação.</string>
+
+    <!--Area Franquia -->
+    <string name="descricao_franquia">Para avançar escolha uma franquia abaixo.</string>
+    <string name="button_ignorar_franquia">Ignorar, não escolher uma franquia agora</string>
+
+    <!--Area Detalhes da Franquia-->
+    <string name="descricao_detalhes">Abaixo detalhes da franquia, escolha uma opção para avançar na sua simulação</string>
+    <string name="button_escolha">Simular</string>
+
+    <!--Area Fim-->
+    <string name="descricao_fim"></string>
+
     <string-array name="franquias_array">
         <item>Escolha uma franquia</item>
         <item>Franquia 1</item>
@@ -13,4 +33,5 @@
         <item>Franquia 7</item>
         <item>Franquia 8</item>
     </string-array>
+
 </resources>

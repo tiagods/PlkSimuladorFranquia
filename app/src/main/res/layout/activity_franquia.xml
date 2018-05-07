@@ -25,7 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Para avançar escolha uma franquia abaixo " />
+                android:text="@string/descricao_franquia" />
         </LinearLayout>
 
         <LinearLayout
@@ -53,8 +53,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Não quero escolher uma franquia agora"
-                app:bootstrapBrand="warning"
+                android:text="@string/button_ignorar_franquia"
+                app:bootstrapBrand="danger"
                 app:bootstrapSize="md"
                 app:buttonMode="regular"
                 app:layout_constraintBottom_toBottomOf="parent"

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="DATABASE_NAME">prolink</string>
+    <string name="DATABASE_VERSION">1</string>
+</resources>
