@@ -15,8 +15,8 @@ public class FimActivity extends AppCompatActivity implements View.OnClickListen
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fim);
-        BootstrapButton concluir = findViewById(R.id.buttonConcluir);
-        final BootstrapButton refazer = findViewById(R.id.buttonRefazer);
+        BootstrapButton concluir = (BootstrapButton)findViewById(R.id.buttonConcluir);
+        BootstrapButton refazer = (BootstrapButton)findViewById(R.id.buttonRefazer);
         refazer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,6 +42,7 @@ public class FimActivity extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
     }
 }

@@ -17,7 +17,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="50dp"
+            android:layout_marginTop="20dp"
             android:orientation="horizontal">
 
             <TextView
@@ -25,7 +26,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/descricao_detalhes" />
+                android:text="@string/descricao_detalhes"
+                android:textSize="24sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -46,30 +48,34 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="250dp"
                         android:layout_height="wrap_content"
-                        android:gravity="center" />
+                        android:gravity="center"
+                        android:textSize="24sp" />
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="200dp"
                         android:layout_height="wrap_content"
                         android:background="@color/colorTableGreen"
                         android:text="Opção 1"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="#FFFFFF"
+                        android:textSize="24sp" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="200dp"
                         android:layout_height="wrap_content"
                         android:background="@color/colorTableBlue"
                         android:text="Opção 2"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="#FFFFFF"
+                        android:textSize="24sp" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="167dp"
                         android:layout_height="wrap_content"
                         android:background="@color/colorTableRed"
                         android:text="Opção 3"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="#FFFFFF"
+                        android:textSize="24sp" />
                 </TableRow>
 
                 <View
@@ -87,7 +93,8 @@
                         android:layout_height="wrap_content"
                         android:background="@color/colorTableGrey"
                         android:text="Investimento"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="#FFFFFF"
+                        android:textSize="24sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -95,14 +102,16 @@
                         android:layout_span="1"
                         android:background="@color/colorTableGreen"
                         android:text="R$ 100.000,00"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="#FFFFFF"
+                        android:textSize="24sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@color/colorTableBlue"
                         android:text="R$ 150.000,00"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="#FFFFFF"
+                        android:textSize="24sp" />
 
                     <TextView
                         android:id="@+id/textView2"
@@ -110,7 +119,8 @@
                         android:layout_height="wrap_content"
                         android:background="@color/colorTableRed"
                         android:text="R$ 200.00,00"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="#FFFFFF"
+                        android:textSize="24sp" />
                 </TableRow>
 
                 <View
@@ -127,29 +137,33 @@
                         android:layout_height="wrap_content"
                         android:background="@color/colorTableGrey"
                         android:text="Retorno"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="#FFFFFF"
+                        android:textSize="24sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_span="1"
                         android:background="@color/colorTableGreen"
-                        android:text="R$ 100.000,00"
-                        android:textColor="#FFFFFF" />
+                        android:text="R$ 200.000,00"
+                        android:textColor="#FFFFFF"
+                        android:textSize="24sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:background="@color/colorTableBlue"
-                        android:text="R$ 150.000,00"
-                        android:textColor="#FFFFFF" />
+                        android:text="R$ 300.000,00"
+                        android:textColor="#FFFFFF"
+                        android:textSize="24sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@color/colorTableRed"
-                        android:text="R$ 200.00,00"
-                        android:textColor="#FFFFFF" />
+                        android:text="R$ 400.00,00"
+                        android:textColor="#FFFFFF"
+                        android:textSize="24sp" />
                 </TableRow>
 
                 <View
@@ -168,7 +182,8 @@
                         android:layout_height="wrap_content"
                         android:background="@color/colorTableGrey"
                         android:text="Custo"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="#FFFFFF"
+                        android:textSize="24sp" />
 
                     <TextView
                         android:id="@+id/textView4"
@@ -177,7 +192,8 @@
                         android:layout_span="1"
                         android:background="@color/colorTableGreen"
                         android:text="3 anos"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="#FFFFFF"
+                        android:textSize="24sp" />
 
                     <TextView
                         android:id="@+id/textView5"
@@ -185,7 +201,8 @@
                         android:layout_height="wrap_content"
                         android:background="@color/colorTableBlue"
                         android:text="2 anos"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="#FFFFFF"
+                        android:textSize="24sp" />
 
                     <TextView
                         android:id="@+id/textView6"
@@ -193,7 +210,8 @@
                         android:layout_height="wrap_content"
                         android:background="@color/colorTableRed"
                         android:text="1 ano"
-                        android:textColor="#FFFFFF" />
+                        android:textColor="#FFFFFF"
+                        android:textSize="24sp" />
 
                 </TableRow>
 
@@ -212,53 +230,31 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
-                    <com.beardedhen.androidbootstrap.BootstrapButton
+                    <Button
+                        android:id="@+id/button5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/bootstrap_brand_warning"
+                        android:text="@string/button_escolha"
+                        android:textColor="#FFFFFF"
+                        android:textSize="24sp" />
+
+                    <Button
                         android:id="@+id/button2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:onClick="onClick"
-                        android:text="@string/button_escolha"
-                        app:bootstrapBrand="primary"
-                        app:bootstrapSize="md"
-                        app:buttonMode="regular"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:showOutline="false" />
-
-                    <com.beardedhen.androidbootstrap.BootstrapButton
-                        android:id="@+id/button3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:onClick="onClick"
+                        android:background="@color/bootstrap_brand_warning"
                         android:text="@string/button_escolha"
-                        app:bootstrapBrand="primary"
-                        app:bootstrapSize="md"
-                        app:buttonMode="regular"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:showOutline="false" />
+                        android:textColor="#FFFFFF"
+                        android:textSize="24sp" />
 
-                    <com.beardedhen.androidbootstrap.BootstrapButton
-                        android:id="@+id/button4"
+                    <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:onClick="onClick"
+                        android:background="@color/bootstrap_brand_warning"
                         android:text="@string/button_escolha"
-                        app:bootstrapBrand="primary"
-                        app:bootstrapSize="md"
-                        app:buttonMode="regular"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:showOutline="false" />
+                        android:textColor="#FFFFFF"
+                        android:textSize="24sp" />
 
                 </TableRow>
                 <!--<Button android:id="@+id/button1" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Button"/>-->
@@ -273,20 +269,6 @@
             android:layout_marginBottom="10dp"
             android:orientation="horizontal">
 
-            <com.beardedhen.androidbootstrap.BootstrapButton
-                android:id="@+id/button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/button_avancar"
-                app:bootstrapBrand="success"
-                app:bootstrapSize="md"
-                app:buttonMode="regular"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:showOutline="false" />
         </LinearLayout>
     </LinearLayout>
 

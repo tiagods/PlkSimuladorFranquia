@@ -18,7 +18,7 @@ public class FranquiaEscolhaActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_franquia);
 
-        Spinner spinner = findViewById(R.id.spinner);
+        Spinner spinner = (Spinner)findViewById(R.id.spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.franquias_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -34,7 +34,7 @@ public class FranquiaEscolhaActivity extends AppCompatActivity{
             }
         });
 
-        BootstrapButton button = findViewById(R.id.buttonRejeitar);
+        BootstrapButton button = (BootstrapButton)findViewById(R.id.buttonRejeitar);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

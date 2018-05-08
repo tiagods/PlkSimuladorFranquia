@@ -25,16 +25,16 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
 
-        btSimular = findViewById(R.id.button);
-        nome = findViewById(R.id.txNome);
-        telefone = findViewById(R.id.txFone);
-        email = findViewById(R.id.txEmail);
+        btSimular = (BootstrapButton)findViewById(R.id.button);
+        nome = (BootstrapEditText)findViewById(R.id.txNome);
+        telefone = (BootstrapEditText)findViewById(R.id.txFone);
+        email = (BootstrapEditText)findViewById(R.id.txEmail);
 
         btSimular.setOnClickListener(CadastroActivity.this);
 
         ContatoOpenHelper a = new ContatoOpenHelper(this);
         a.drop();
-        Log.v("MYAPP","Table Contato erase");
+        Log.v("MYAPP","Limpando Tabela de Contatos");
         for(Contato c : a.getAll()){
             Log.v("MYAPP",c.getId()+"\t "+c.getNome()+"\t "+c.getTelefone()+"\t "+c.getEmail());
         }
