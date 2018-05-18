@@ -67,6 +67,7 @@
                 app:bootstrapBrand="danger"
                 app:bootstrapSize="xl"
                 app:buttonMode="regular"
+                app:roundedCorners="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

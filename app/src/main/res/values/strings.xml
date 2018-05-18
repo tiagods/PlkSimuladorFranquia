@@ -20,6 +20,7 @@
 
     <!--Area Fim-->
     <string name="descricao_fim"></string>
+    <string name="descricao_resultado"></string>
 
     <string-array name="franquias_array">
         <item>Escolha uma franquia</item>

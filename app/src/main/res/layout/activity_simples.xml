@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
-    tools:context="com.prolink.tiago.plksimuladorfranquia.activity.CadastroActivity"
+    tools:context="com.prolink.tiago.plksimuladorfranquia.activity.SimplesActivity"
     >
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,23 +33,22 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginBottom="20dp"
-
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Nome:"
+                android:text="Faturamento(Médio)"
                 android:textSize="24sp" />
 
             <com.beardedhen.androidbootstrap.BootstrapEditText
-                android:id="@+id/txNome"
+                android:id="@+id/txFaturamento"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:maxWidth="100dp"
-                android:minWidth="70dp"
+                android:minWidth="100dp"
                 app:bootstrapSize="xl"
                 app:roundedCorners="true" />
         </LinearLayout>
@@ -64,43 +63,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Telefone:"
+                android:text="Pró-Labore(Médio):"
                 android:textSize="24sp" />
 
             <com.beardedhen.androidbootstrap.BootstrapEditText
-                android:id="@+id/txFone"
+                android:id="@+id/txProlabore"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:inputType="phone"
                 android:maxWidth="100dp"
                 android:minWidth="100dp"
-                android:phoneNumber="true"
                 android:singleLine="true"
-                app:bootstrapSize="xl"
-                app:roundedCorners="true" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="50dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="E-Mail:"
-                android:textSize="24sp" />
-
-            <com.beardedhen.androidbootstrap.BootstrapEditText
-                android:id="@+id/txEmail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:maxWidth="100dp"
-                android:minWidth="70dp"
                 app:bootstrapSize="xl"
                 app:roundedCorners="true" />
         </LinearLayout>
@@ -118,10 +91,11 @@
                 android:layout_weight="1" />
 
             <com.beardedhen.androidbootstrap.BootstrapButton
-                android:id="@+id/button"
+                android:id="@+id/btSimular"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:onClick="onClick"
                 android:text="@string/button_avancar"
                 app:bootstrapBrand="success"
                 app:bootstrapSize="xl"
@@ -130,9 +104,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:showOutline="false"
-                app:roundedCorners="true"
-                />
+                app:showOutline="false" />
 
             <Space
                 android:layout_width="match_parent"

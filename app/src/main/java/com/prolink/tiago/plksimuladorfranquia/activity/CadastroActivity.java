@@ -10,6 +10,7 @@ import android.view.View;
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.beardedhen.androidbootstrap.BootstrapEditText;
 import com.prolink.tiago.plksimuladorfranquia.R;
+import com.prolink.tiago.plksimuladorfranquia.dao.ContatoDAO;
 import com.prolink.tiago.plksimuladorfranquia.helper.ContatoOpenHelper;
 import com.prolink.tiago.plksimuladorfranquia.model.Contato;
 
@@ -31,25 +32,16 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
         email = (BootstrapEditText)findViewById(R.id.txEmail);
 
         btSimular.setOnClickListener(CadastroActivity.this);
-
-        ContatoOpenHelper a = new ContatoOpenHelper(this);
-        a.drop();
-        Log.v("MYAPP","Limpando Tabela de Contatos");
-        for(Contato c : a.getAll()){
-            Log.v("MYAPP",c.getId()+"\t "+c.getNome()+"\t "+c.getTelefone()+"\t "+c.getEmail());
-        }
     }
     @Override
     public void onClick(View view){
-        ContatoOpenHelper a = new ContatoOpenHelper(this);
-        Contato contato = new Contato();
-        contato.setNome(nome.getText().toString());
-        contato.setTelefone(telefone.getText().toString());
-        contato.setEmail(email.getText().toString());
-        a.insert(contato);
-        for(Contato c : a.getAll()){
-            Log.v("MYAPP",c.getId()+"\t "+c.getNome()+"\t "+c.getTelefone()+"\t "+c.getEmail());
+        Intent intent = new Intent(this,FranquiaEscolhaActivity.class);
+
+        ContatoDAO dao = new ContatoDAO(this);
+        Contato contato = dao.cadastrar(nome.getText().toString(),email.getText().toString(),telefone.getText().toString());
+        if(contato!=null) {
+            intent.putExtra("contato", contato);
         }
-        startActivity(new Intent(this,FranquiaEscolhaActivity.class));
+        startActivity(intent);
     }
 }

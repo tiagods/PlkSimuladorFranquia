@@ -31,8 +31,7 @@ public class FranquiaDetalhesActivity extends AppCompatActivity implements View.
     }
     @Override
     public void onClick(View view){
-        Intent intent = new Intent(this,FimActivity.class);
+        Intent intent = new Intent(this,ResultadoActivity.class);
         startActivity(intent);
-
     }
 }

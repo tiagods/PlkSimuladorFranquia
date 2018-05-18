@@ -6,36 +6,34 @@
     android:layout_height="match_parent"
     tools:context="com.prolink.tiago.plksimuladorfranquia.activity.FimActivity">
 
+
     <com.beardedhen.androidbootstrap.BootstrapButton
-        android:id="@+id/buttonConcluir"
+        android:id="@+id/btConcluirFim"
         android:layout_width="222dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="122dp"
+        android:layout_marginBottom="47dp"
         android:layout_marginEnd="146dp"
         android:layout_marginStart="146dp"
-        android:layout_marginTop="121dp"
+        android:layout_marginTop="576dp"
         android:layout_weight="1"
         android:text="Concluir"
         app:bootstrapBrand="success"
         app:bootstrapSize="xl"
         app:buttonMode="regular"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.354"
         app:roundedCorners="true"
         app:showOutline="false" />
 
     <com.beardedhen.androidbootstrap.BootstrapButton
-        android:id="@+id/buttonRefazer"
+        android:id="@+id/btRefazerFim"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="122dp"
+        android:layout_marginBottom="164dp"
         android:layout_marginEnd="146dp"
         android:layout_marginStart="146dp"
-        android:layout_marginTop="121dp"
+        android:layout_marginTop="47dp"
         android:layout_weight="1"
         android:text="Refazer Simulação"
         app:bootstrapBrand="primary"
@@ -44,8 +42,23 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:roundedCorners="true"
         app:showOutline="false" />
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="375dp"
+        android:layout_height="423dp"
+        android:layout_marginBottom="36dp"
+        android:layout_marginEnd="174dp"
+        android:layout_marginStart="172dp"
+        android:layout_marginTop="49dp"
+        android:background="@drawable/thank_you_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.531"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.705" />
 
 </android.support.constraint.ConstraintLayout>

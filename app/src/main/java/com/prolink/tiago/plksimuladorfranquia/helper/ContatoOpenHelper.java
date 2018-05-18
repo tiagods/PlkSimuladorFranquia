@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.prolink.tiago.plksimuladorfranquia.R;
 import com.prolink.tiago.plksimuladorfranquia.model.Contato;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +26,10 @@ public class ContatoOpenHelper extends SQLiteOpenHelper {
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "nome VARCHAR," +
                 "telefone VARCHAR," +
-                "email varchar" +
+                "email VARCHAR," +
+                "sincronizado INTEGER," +
+                "faturamento DECIMAL(10,2)," +
+                "prolabore DECIMAL(10,2)" +
                 ");";
         db.execSQL(create);
     }
@@ -45,7 +49,16 @@ public class ContatoOpenHelper extends SQLiteOpenHelper {
         values.put("nome", contato.getNome());
         values.put("telefone",contato.getTelefone());
         values.put("email",contato.getEmail());
+        values.put("sincronizado",contato.getSincronizado());
+        values.put("faturamento",contato.getFaturamento().doubleValue());
+        values.put("prolabore",contato.getProlabore().doubleValue());
         getWritableDatabase().insert(CONTATO_TABLE_NAME,null,values);
+    }
+    public void update(Contato contato){
+        ContentValues values = new ContentValues();
+        values.put("faturamento", contato.getFaturamento().doubleValue());
+        values.put("prolabore",contato.getProlabore().doubleValue());
+        getWritableDatabase().update(CONTATO_TABLE_NAME,values,"id="+contato.getId(),null);
     }
     public List<Contato> getAll(){
         List<Contato> contatoList = new ArrayList<>();
@@ -57,11 +70,29 @@ public class ContatoOpenHelper extends SQLiteOpenHelper {
             c.setNome(res.getString(res.getColumnIndex("nome")));
             c.setTelefone(res.getString(res.getColumnIndex("telefone")));
             c.setEmail(res.getString(res.getColumnIndex("email")));
+            c.setSincronizado(res.getInt(res.getColumnIndex("sincronizado")));
+            c.setFaturamento(new BigDecimal(res.getDouble(res.getColumnIndex("faturamento"))));
+            c.setProlabore(new BigDecimal(res.getDouble(res.getColumnIndex("prolabore"))));
             contatoList.add(c);
             res.moveToNext();
         }
         return contatoList;
     }
-
+    public Contato getLast(){
+        String sql="SELECT * FROM "+CONTATO_TABLE_NAME+" ORDER BY id DESC LIMIT 1";
+        Cursor res = getReadableDatabase().rawQuery(sql,null);
+        if(res.moveToFirst()){
+            Contato c = new Contato();
+            c.setId(res.getInt(res.getColumnIndex("id")));
+            c.setNome(res.getString(res.getColumnIndex("nome")));
+            c.setTelefone(res.getString(res.getColumnIndex("telefone")));
+            c.setEmail(res.getString(res.getColumnIndex("email")));
+            c.setSincronizado(res.getInt(res.getColumnIndex("sincronizado")));
+            c.setFaturamento(new BigDecimal(res.getDouble(res.getColumnIndex("faturamento"))));
+            c.setProlabore(new BigDecimal(res.getDouble(res.getColumnIndex("prolabore"))));
+            return c;
+        }
+        return null;
+    }
 
 }
