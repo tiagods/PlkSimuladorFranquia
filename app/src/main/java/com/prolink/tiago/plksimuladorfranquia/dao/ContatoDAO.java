@@ -6,8 +6,11 @@ import android.util.Log;
 import com.prolink.tiago.plksimuladorfranquia.helper.ContatoOpenHelper;
 import com.prolink.tiago.plksimuladorfranquia.model.Contato;
 
+import java.util.List;
+
 public class ContatoDAO {
     private Context context;
+
     public ContatoDAO(Context context){
         this.context=context;
         ContatoOpenHelper a = new ContatoOpenHelper(this.context);
@@ -29,5 +32,15 @@ public class ContatoDAO {
             Log.v("MYAPP",c.getId()+"\t "+c.getNome()+"\t "+c.getTelefone()+"\t "+c.getEmail());
         }
         return contato;
+    }
+    public void atualizar(Contato contato){
+        ContatoOpenHelper a = new ContatoOpenHelper(this.context);
+        a.update(contato);
+        Log.v("MYAPP",contato.getId()+"\t "+contato.getNome()+"\t "+contato.getTelefone()+"\t "+contato.getEmail());
+    }
+
+    public List<Contato> filtrarNaoSincronizados() {
+        ContatoOpenHelper a = new ContatoOpenHelper(this.context);
+        return a.filtrarNaoSincronizados();
     }
 }

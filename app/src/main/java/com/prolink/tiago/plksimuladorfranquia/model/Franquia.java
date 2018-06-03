@@ -6,6 +6,7 @@ import java.util.Objects;
 public class Franquia implements Serializable{
     private int id;
     private String nome;
+    private int ativo;
 
     public int getId() {
         return id;
@@ -21,6 +22,14 @@ public class Franquia implements Serializable{
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public int getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(int ativo) {
+        this.ativo = ativo;
     }
 
     @Override

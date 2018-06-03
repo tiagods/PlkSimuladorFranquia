@@ -16,7 +16,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="39dp"
+            android:layout_height="100dp"
             android:layout_marginBottom="50dp"
             android:layout_marginTop="20dp"
             android:orientation="horizontal">
@@ -49,6 +49,7 @@
                 android:layout_weight="1"
                 android:maxWidth="100dp"
                 android:minWidth="100dp"
+                android:numeric="decimal"
                 app:bootstrapSize="xl"
                 app:roundedCorners="true" />
         </LinearLayout>
@@ -73,6 +74,7 @@
                 android:layout_weight="1"
                 android:maxWidth="100dp"
                 android:minWidth="100dp"
+                android:numeric="decimal"
                 android:singleLine="true"
                 app:bootstrapSize="xl"
                 app:roundedCorners="true" />
@@ -98,7 +100,7 @@
                 android:onClick="onClick"
                 android:text="@string/button_avancar"
                 app:bootstrapBrand="success"
-                app:bootstrapSize="xl"
+                app:bootstrapSize="lg"
                 app:buttonMode="regular"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

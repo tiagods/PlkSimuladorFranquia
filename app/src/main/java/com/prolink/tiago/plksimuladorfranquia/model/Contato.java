@@ -4,14 +4,13 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public class Contato implements Serializable{
+public class Contato  extends FaturamentoConsumo implements Serializable{
     private int id;
     private String nome;
     private String telefone;
     private String email;
-    private int sincronizado=0;
-    private BigDecimal faturamento=new BigDecimal(0.00);
-    private BigDecimal prolabore=new BigDecimal(0.00);
+    private int sincronizado=1;
+    private int contato_id=0;
 
     public int getId() {
         return id;
@@ -45,30 +44,15 @@ public class Contato implements Serializable{
         this.email = email;
     }
 
-    public int getSincronizado() {
-        return sincronizado;
-    }
+    public int getSincronizado() {return sincronizado;}
 
-    public void setSincronizado(int sincronizado) {
-        this.sincronizado = sincronizado;
-    }
+    public void setSincronizado(int sincronizado) {this.sincronizado = sincronizado;}
 
-    public BigDecimal getFaturamento() {
-        return faturamento;
-    }
+    public int getContato_id() {return contato_id;}
 
-    public void setFaturamento(BigDecimal faturamento) {
-        this.faturamento = faturamento;
+    public void setContato_id(int contato_id) {
+        this.contato_id = contato_id;
     }
-
-    public BigDecimal getProlabore() {
-        return prolabore;
-    }
-
-    public void setProlabore(BigDecimal prolabore) {
-        this.prolabore = prolabore;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -81,5 +65,6 @@ public class Contato implements Serializable{
     public int hashCode() {
         return Objects.hash(id, email);
     }
+
 
 }

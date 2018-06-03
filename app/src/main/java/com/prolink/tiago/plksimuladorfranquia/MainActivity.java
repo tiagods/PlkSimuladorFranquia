@@ -8,6 +8,11 @@ import android.view.View;
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.prolink.tiago.plksimuladorfranquia.R;
 import com.prolink.tiago.plksimuladorfranquia.activity.CadastroActivity;
+import com.prolink.tiago.plksimuladorfranquia.dao.ContatoDAO;
+import com.prolink.tiago.plksimuladorfranquia.model.Contato;
+import com.prolink.tiago.plksimuladorfranquia.task.ContatoRestClientUsage;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -20,6 +25,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         button = (BootstrapButton)findViewById(R.id.button);
         button.setOnClickListener(MainActivity.this);
+
+        //verificar se existe algum registro desincronizado e atualiza
+        ContatoDAO dao = new ContatoDAO(this);
+        List<Contato> contatos = dao.filtrarNaoSincronizados();
+        if(contatos.isEmpty()){
+            ContatoRestClientUsage rest = new ContatoRestClientUsage(this);
+            rest.enviar(contatos);
+        }
     }
     @Override
     public void onClick(View view){
