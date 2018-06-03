@@ -1,36 +1,22 @@
 package com.prolink.tiago.plksimuladorfranquia.model;
 
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public class Franquia implements Serializable{
-    private int id;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+    private Long id;
     private String nome;
-    private int ativo;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public int getAtivo() {
-        return ativo;
-    }
-
-    public void setAtivo(int ativo) {
-        this.ativo = ativo;
-    }
+    private int ativo=1;
+    private Calendar lastUpdate;
+    private Calendar criadoEm;
+    private Set<FranquiaPacote> pacotes= new HashSet<>();
 
     @Override
     public boolean equals(Object o) {

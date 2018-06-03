@@ -29,23 +29,26 @@ public class ContatoOpenHelper extends SQLiteOpenHelper {
                 "email VARCHAR," +
                 "sincronizado INTEGER," +
                 "contato_id INTEGER,"+
-                "aliquota INTEGER,"+
+                "aliquota DECIMLA(10,2),"+
                 "tipo INTEGER,"+
                 "faturamento DECIMAL(10,2)," +
                 "prolabore DECIMAL(10,2)" +
                 ");";
         db.execSQL(create);
+        db.close();
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS "+CONTATO_TABLE_NAME);
-        onCreate(db);
+        //db.execSQL("DROP TABLE IF EXISTS "+CONTATO_TABLE_NAME);
+        //onCreate(db);
     }
+
     public void drop(){
         SQLiteDatabase db  = getWritableDatabase();
         db.execSQL("DROP TABLE IF EXISTS "+CONTATO_TABLE_NAME);
         onCreate(db);
     }
+
 
     public void insert(Contato contato){
         ContentValues values = new ContentValues();
@@ -57,7 +60,9 @@ public class ContatoOpenHelper extends SQLiteOpenHelper {
         values.put("aliquota",contato.getAliquotaICMS());
         values.put("faturamento",contato.getFaturamento().doubleValue());
         values.put("prolabore",contato.getProlabore().doubleValue());
-        getWritableDatabase().insert(CONTATO_TABLE_NAME,null,values);
+        SQLiteDatabase db = getWritableDatabase();
+        db.insert(CONTATO_TABLE_NAME,null,values);
+        db.close();
     }
     public void update(Contato contato){
         ContentValues values = new ContentValues();
@@ -70,25 +75,33 @@ public class ContatoOpenHelper extends SQLiteOpenHelper {
         values.put("tipo",contato.getTipo().toString());
         values.put("sincronizado",contato.getSincronizado());
         values.put("contato_id",contato.getContato_id());
-        getWritableDatabase().update(CONTATO_TABLE_NAME,values,"id="+contato.getId(),null);
+        SQLiteDatabase db = getWritableDatabase();
+        db.update(CONTATO_TABLE_NAME,values,"id="+contato.getId(),null);
+        db.close();
     }
     public List<Contato> getAll(){
         List<Contato> contatoList = new ArrayList<>();
-        Cursor res = getReadableDatabase().rawQuery("SELECT * FROM "+CONTATO_TABLE_NAME,null);
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor res = db.rawQuery("SELECT * FROM "+CONTATO_TABLE_NAME,null);
         res.moveToFirst();
         while(!res.isAfterLast()){
             contatoList.add(cursor(res));
             res.moveToNext();
         }
+        db.close();
         return contatoList;
     }
+
     public Contato getLast(){
         String sql="SELECT * FROM "+CONTATO_TABLE_NAME+" ORDER BY id DESC LIMIT 1";
-        Cursor res = getReadableDatabase().rawQuery(sql,null);
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor res = db.rawQuery(sql,null);
+        Contato contato = null;
         if(res.moveToFirst()){
-            return cursor(res);
+            contato = cursor(res);
         }
-        return null;
+        db.close();
+        return contato;
     }
 
     private Contato cursor(Cursor res){
@@ -105,12 +118,14 @@ public class ContatoOpenHelper extends SQLiteOpenHelper {
     public List<Contato> filtrarNaoSincronizados() {
         List<Contato> contatoList = new ArrayList<>();
         String sql="SELECT * FROM "+CONTATO_TABLE_NAME+" where sincronizado";
-        Cursor res = getReadableDatabase().rawQuery(sql,null);
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor res = db.rawQuery(sql,null);
         res.moveToFirst();
         while(!res.isAfterLast()){
             contatoList.add(cursor(res));
             res.moveToNext();
         }
+        db.close();
         return contatoList;
     }
 }
