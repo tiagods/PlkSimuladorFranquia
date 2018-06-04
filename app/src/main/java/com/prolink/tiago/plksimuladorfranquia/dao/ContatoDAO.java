@@ -14,8 +14,8 @@ public class ContatoDAO {
     public ContatoDAO(Context context){
         this.context=context;
         ContatoOpenHelper a = new ContatoOpenHelper(this.context);
-        //a.drop();
-        //Log.v("MYAPP","Limpando Tabela de Contatos");
+        a.drop();
+        Log.i("MYAPP","Limpando Tabela de Contatos");
         for(Contato c : a.getAll()){
             Log.v("MYAPP",c.getId()+"\t "+c.getNome()+"\t "+c.getTelefone()+"\t "+c.getEmail());
         }

@@ -8,6 +8,7 @@
     tools:context="com.prolink.tiago.plksimuladorfranquia.activity.FranquiaDetalhesActivity">
 
     <LinearLayout
+        android:id="@+id/pnPrincipal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -20,7 +21,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/txPrincipal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -29,273 +30,11 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/pnTabelas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:orientation="vertical">
-
-            <TableLayout
-                android:id="@+id/TableLayout1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:shrinkColumns="1,2,3">
-
-                <TableRow
-                    android:id="@+id/tableRow1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:textSize="24sp" />
-
-                    <TextView
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorTableGreen"
-                        android:text="%"
-                        android:textColor="#FFFFFF"
-                        android:textSize="24sp" />
-
-                    <TextView
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorTableBlue"
-                        android:text="Valor"
-                        android:textColor="#FFFFFF"
-                        android:textSize="24sp" />
-
-                    <TextView
-                        android:layout_width="167dp"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorTableRed"
-                        android:text="Opção 3"
-                        android:textColor="#FFFFFF"
-                        android:textSize="24sp" />
-                </TableRow>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#000000" />
-
-                <TableRow
-                    android:id="@+id/tableRow2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorTableGrey"
-                        android:text="Franquia"
-                        android:textColor="#FFFFFF"
-                        android:textSize="24sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_span="1"
-                        android:background="@color/colorTableGreen"
-                        android:text="---"
-                        android:textColor="#FFFFFF"
-                        android:textSize="24sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorTableBlue"
-                        android:text="R$ 150.000,00"
-                        android:textColor="#FFFFFF"
-                        android:textSize="24sp" />
-
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorTableRed"
-                        android:text="---"
-                        android:textColor="#FFFFFF"
-                        android:textSize="24sp" />
-                </TableRow>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#000000" />
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorTableGrey"
-                        android:text="Retorno"
-                        android:textColor="#FFFFFF"
-                        android:textSize="24sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_span="1"
-                        android:background="@color/colorTableGreen"
-                        android:text=""
-                        android:textColor="#FFFFFF"
-                        android:textSize="24sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:background="@color/colorTableBlue"
-                        android:text=" 2 anos"
-                        android:textColor="#FFFFFF"
-                        android:textSize="24sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorTableRed"
-                        android:text="---"
-                        android:textColor="#FFFFFF"
-                        android:textSize="24sp" />
-                </TableRow>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#000000" />
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorTableGrey"
-                        android:text="Faturamento"
-                        android:textColor="#FFFFFF"
-                        android:textSize="24sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_span="1"
-                        android:background="@color/colorTableGreen"
-                        android:text=""
-                        android:textColor="#FFFFFF"
-                        android:textSize="24sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorTableBlue"
-                        android:text="R$ 20.000,00"
-                        android:textColor="#FFFFFF"
-                        android:textSize="24sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorTableRed"
-                        android:text="---"
-                        android:textColor="#FFFFFF"
-                        android:textSize="24sp" />
-                </TableRow>
-                <View
-                    android:id="@+id/view"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#000000" />
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorTableGrey"
-                        android:text="Pro-Labore"
-                        android:textColor="#FFFFFF"
-                        android:textSize="24sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_span="1"
-                        android:background="@color/colorTableGreen"
-                        android:text=""
-                        android:textColor="#FFFFFF"
-                        android:textSize="24sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorTableBlue"
-                        android:text="R$ 20.000,00"
-                        android:textColor="#FFFFFF"
-                        android:textSize="24sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorTableRed"
-                        android:text="---"
-                        android:textColor="#FFFFFF"
-                        android:textSize="24sp" />
-                </TableRow>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#000000" />
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorTableGrey"
-                        android:text="Impostos"
-                        android:textColor="#FFFFFF"
-                        android:textSize="24sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_span="1"
-                        android:background="@color/colorTableGreen"
-                        android:text="%%%"
-                        android:textColor="#FFFFFF"
-                        android:textSize="24sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorTableBlue"
-                        android:text="R$ 20.000,00"
-                        android:textColor="#FFFFFF"
-                        android:textSize="24sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorTableRed"
-                        android:text="---"
-                        android:textColor="#FFFFFF"
-                        android:textSize="24sp" />
-                </TableRow>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#000000" />
-            </TableLayout>
-
-
         </LinearLayout>
 
         <LinearLayout
@@ -306,10 +45,10 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/txResultado1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Para sua franquia recomendamos o Anexo ? e prolabore mínimo de R$ xxx"
                 android:textSize="24sp" />
 
         </LinearLayout>
@@ -322,15 +61,27 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/txResultado2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="No primeiro mês sua franquia terá um custo de R$xxx, nos meses seguintes, R$xxx somando R$xxx de impostos e R$xxx de prolabore"
                 android:textSize="24sp" />
-
         </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
 
+        <TextView
+            android:id="@+id/txResultado3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="24sp" />
 
+    </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -354,6 +105,7 @@
                 app:showOutline="false" />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"

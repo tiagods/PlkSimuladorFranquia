@@ -1,4 +1,4 @@
-package com.prolink.tiago.plksimuladorfranquia.task;
+package com.prolink.tiago.plksimuladorfranquia.resources;
 
 import android.content.Context;
 import android.os.Handler;
@@ -15,6 +15,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.conn.ConnectTimeoutException;
 import cz.msebera.android.httpclient.entity.StringEntity;
 import cz.msebera.android.httpclient.message.BasicHeader;
 import cz.msebera.android.httpclient.protocol.HTTP;
@@ -36,6 +37,8 @@ public class ContatoRestClientUsage {
                         Log.e("JSONException", e.getMessage());
                     } catch (UnsupportedEncodingException e) {
                         Log.e("UnsupportedEncoding", e.getMessage());
+                    } catch (ConnectTimeoutException e){
+                        Log.e("ConnectTimeoutException", e.getMessage());
                     }
                 }
             }
@@ -43,7 +46,7 @@ public class ContatoRestClientUsage {
         mainHandler.post(runnable);
     }
 
-    public void setPost(final Context context, final Contato contato) throws JSONException,UnsupportedEncodingException {
+    public void setPost(final Context context, final Contato contato) throws JSONException,UnsupportedEncodingException,ConnectTimeoutException{
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("nome", contato.getNome());
         jsonObject.put("email", contato.getEmail());
@@ -75,7 +78,7 @@ public class ContatoRestClientUsage {
             }
         });
     }
-    public void getPublic(Long id){
+    public void getPublic(Long id) throws JSONException,UnsupportedEncodingException,ConnectTimeoutException{
         String url = "";
         if(id!=null) url = "/"+id;
         ContatosRestClient contatosRestClient = new ContatosRestClient();

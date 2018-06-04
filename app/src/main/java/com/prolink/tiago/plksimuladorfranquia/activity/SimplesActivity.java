@@ -16,16 +16,26 @@ import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.beardedhen.androidbootstrap.BootstrapEditText;
 import com.prolink.tiago.plksimuladorfranquia.MainActivity;
 import com.prolink.tiago.plksimuladorfranquia.R;
+import com.prolink.tiago.plksimuladorfranquia.config.AnexosConfig;
 import com.prolink.tiago.plksimuladorfranquia.dao.ContatoDAO;
+import com.prolink.tiago.plksimuladorfranquia.model.Anexo;
+import com.prolink.tiago.plksimuladorfranquia.model.Faturamento;
+import com.prolink.tiago.plksimuladorfranquia.model.FaturamentoConsumo;
+import com.prolink.tiago.plksimuladorfranquia.model.FranquiaPacote;
 import com.prolink.tiago.plksimuladorfranquia.util.MoneyTextWatcher;
 
+import java.io.Serializable;
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Set;
 
 public class SimplesActivity extends AppCompatActivity implements View.OnClickListener{
 
+    private NumberFormat nf = NumberFormat.getCurrencyInstance();
     private BootstrapEditText faturamento;
     private BootstrapEditText prolabore;
 
@@ -47,36 +57,49 @@ public class SimplesActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View view){
         if(!validar())
             return;
+
+        Number fat = null;
+        Number pro = null;
+        try {
+            fat = nf.parse(faturamento.getText().toString());
+            pro = nf.parse(prolabore.getText().toString());
+        }catch (ParseException e){
+
+        }
         Intent intent = new Intent(this,ResultadoActivity.class);
-        //intent.putExtra("contato",contato);
+        FaturamentoConsumo faturamentoConsumo = new FaturamentoConsumo();
+        //Faturamento faturamentoConsumo = new FranquiaPacote();
+
+        faturamentoConsumo.setFaturamento(fat.doubleValue());
+        faturamentoConsumo.setProlabore(pro.doubleValue());
+        intent.putExtra("faturamento",faturamentoConsumo);
         startActivity(intent);
     }
     private boolean validar(){
-        NumberFormat nf = NumberFormat.getCurrencyInstance();
-        Number fat = null;
         try {
-            fat = nf.parse(faturamento.getText().toString());
-            Number pro = nf.parse(faturamento.getText().toString());
+            Number fat = nf.parse(faturamento.getText().toString());
+            if(fat.doubleValue()<=4800000) return true;//limite
+            else{
+                //Cria o gerador do AlertDialog
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                //define o titulo
+                builder.setTitle("Impossivel avançar");
+                //define a mensagem
+                builder.setMessage("O faturamento não pode ser superior a 4.800.000,00 por ano!");
+                //define um botão como positivo
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        Toast.makeText(SimplesActivity.this, "Ok=" + arg1, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                //cria o AlertDialog
+                AlertDialog alerta = builder.create();
+                alerta.show();
+                return false;
+            }
         }catch (ParseException e){
             return false;
         }
-        if(fat.doubleValue()<=4800000) return true;//limite
-
-        //Cria o gerador do AlertDialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        //define o titulo
-        builder.setTitle("Impossivel avançar");
-        //define a mensagem
-        builder.setMessage("O faturamento não pode ser superior a 4.800.000,00 por ano!");
-        //define um botão como positivo
-        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface arg0, int arg1) {
-                Toast.makeText(SimplesActivity.this, "Ok=" + arg1, Toast.LENGTH_SHORT).show();
-            }
-        });
-        //cria o AlertDialog
-        AlertDialog alerta = builder.create();
-        alerta.show();
-        return false;
     }
+
 }

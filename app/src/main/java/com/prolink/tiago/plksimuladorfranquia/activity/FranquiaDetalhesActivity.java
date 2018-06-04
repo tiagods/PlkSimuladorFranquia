@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.prolink.tiago.plksimuladorfranquia.R;
+import com.prolink.tiago.plksimuladorfranquia.model.Franquia;
+import com.prolink.tiago.plksimuladorfranquia.model.FranquiaPacote;
 
 public class FranquiaDetalhesActivity extends AppCompatActivity implements View.OnClickListener{
     @Override
@@ -32,6 +34,12 @@ public class FranquiaDetalhesActivity extends AppCompatActivity implements View.
     @Override
     public void onClick(View view){
         Intent intent = new Intent(this,ResultadoActivity.class);
+        startActivity(intent);
+    }
+    public void escolhaFranquiaPacote(Franquia franquia, FranquiaPacote pacote){
+        Intent intent = new Intent(this, ResultadoActivity.class);
+        pacote.setNome(franquia.getNome()+" - "+pacote.getNome());
+        intent.putExtra("faturamento",pacote);
         startActivity(intent);
     }
 }

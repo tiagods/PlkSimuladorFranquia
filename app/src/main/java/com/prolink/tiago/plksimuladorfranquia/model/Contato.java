@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public class Contato  extends FaturamentoConsumo implements Serializable{
+public class Contato implements Serializable{
     private int id;
     private String nome;
     private String telefone;

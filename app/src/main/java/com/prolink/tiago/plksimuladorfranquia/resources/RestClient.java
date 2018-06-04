@@ -1,4 +1,4 @@
-package com.prolink.tiago.plksimuladorfranquia.task;
+package com.prolink.tiago.plksimuladorfranquia.resources;
 
 import android.content.Context;
 
@@ -7,10 +7,9 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.prolink.tiago.plksimuladorfranquia.config.HostConfig;
 
-import cz.msebera.android.httpclient.Header;
 import cz.msebera.android.httpclient.HttpEntity;
 
-public class ContatosRestClient {
+public abstract class RestClient {
     private static final String BASE_URL = HostConfig.getInstance().HOST;
     private static AsyncHttpClient client = new AsyncHttpClient();
     public static void get(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {

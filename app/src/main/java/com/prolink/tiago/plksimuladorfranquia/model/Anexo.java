@@ -1,7 +1,9 @@
 package com.prolink.tiago.plksimuladorfranquia.model;
 
 
-public class Anexo {
+import java.io.Serializable;
+
+public class Anexo implements Serializable{
     public Anexo(){
 
     }
@@ -60,5 +62,20 @@ public class Anexo {
 
     public void setDescontoRecolhimento(double descontoRecolhimento) {
         this.descontoRecolhimento = descontoRecolhimento;
+    }
+
+    public boolean estaDentroDoLimite(double faturamento){
+        return (faturamento >= valorInicial && faturamento<=valorFinal);
+    }
+
+    @Override
+    public String toString() {
+        return "Anexo{" +
+                "enquadramento=" + enquadramento +
+                ", valorInicial=" + valorInicial +
+                ", valorFinal=" + valorFinal +
+                ", aliquota=" + aliquota +
+                ", descontoRecolhimento=" + descontoRecolhimento +
+                '}';
     }
 }

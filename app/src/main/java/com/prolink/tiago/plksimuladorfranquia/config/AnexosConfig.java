@@ -7,9 +7,9 @@ import java.util.Set;
 
 public class AnexosConfig {
     private static AnexosConfig instance;
-    Set<Anexo> anexoList = new HashSet<>();
+    private Set<Anexo> anexoList = new HashSet<>();
 
-    public AnexosConfig getInstance() {
+    public static AnexosConfig getInstance() {
         if(instance==null) instance = new AnexosConfig();
         return instance;
     }
@@ -77,4 +77,7 @@ public class AnexosConfig {
         anexoList.add(new Anexo(Anexo.Enquadramento.ANEXO5, linha6i, linha6f, 30.50, 540000.00));
     }
 
+    public Set<Anexo> getAnexoList() {
+        return anexoList;
+    }
 }

@@ -8,5 +8,5 @@
     <color name="colorTableRed">#F46542</color>
     <color name="colorTableGreen">#56a354</color>
     <color name="colorTableBlue">#303F9F</color>
-
+    <color name="colorTableTextWhite">#FFFFFF</color>
 </resources>

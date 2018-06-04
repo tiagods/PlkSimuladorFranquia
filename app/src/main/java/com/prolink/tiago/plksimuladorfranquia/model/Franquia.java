@@ -28,7 +28,59 @@ public class Franquia implements Serializable{
 
     @Override
     public int hashCode() {
-
         return Objects.hash(id);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public int getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(int ativo) {
+        this.ativo = ativo;
+    }
+
+    public Calendar getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(Calendar lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+
+    public Calendar getCriadoEm() {
+        return criadoEm;
+    }
+
+    public void setCriadoEm(Calendar criadoEm) {
+        this.criadoEm = criadoEm;
+    }
+
+    public Set<FranquiaPacote> getPacotes() {
+        return pacotes;
+    }
+
+    public void setPacotes(Set<FranquiaPacote> pacotes) {
+        this.pacotes = pacotes;
+    }
+
+    @Override
+    public String toString() {
+        return this.nome;
     }
 }
