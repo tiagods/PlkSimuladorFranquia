@@ -32,12 +32,15 @@ public class FranquiaOpenHelper extends SQLiteOpenHelper {
         String create2 = "CREATE TABLE "+ FRANQUIA_PACOTE_TABLE_NAME +"(" +
                 "id INTEGER PRIMARY KEY," +
                 "nome VARCHAR," +
-                "investimento DECIMAL(10,2)," +
+                "franquia_id INTEGER," +
                 "custo DECIMAL(10,2)," +
+                "investimento DECIMAL(10,2)," +
                 "previsao VARCHAR," +
                 "faturamento DECIMAL(10,2)," +
                 "icms DECIMAL(10,2)," +
-                "franquia_id INTEGER"+
+                "prolabore DECIMAL(10,2)," +
+                "base_icms DECIMAL(10,2)," +
+                "tipo VARCHAR" +
                 ")";
         db.execSQL(create1);
         db.execSQL(create2);
@@ -45,7 +48,9 @@ public class FranquiaOpenHelper extends SQLiteOpenHelper {
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        db.execSQL("DROP TABLE IF EXISTS "+FRANQUIA_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS "+FRANQUIA_PACOTE_TABLE_NAME);
+        onCreate(db);
     }
     public void drop(){
         SQLiteDatabase db  = getWritableDatabase();

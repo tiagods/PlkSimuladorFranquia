@@ -20,7 +20,7 @@ import cz.msebera.android.httpclient.entity.StringEntity;
 import cz.msebera.android.httpclient.message.BasicHeader;
 import cz.msebera.android.httpclient.protocol.HTTP;
 
-public class ContatoRestClientUsage {
+public class ContatoRestClientUsage extends RestClient{
     private Context context;
     public ContatoRestClientUsage(Context context){
         this.context=context;
@@ -37,8 +37,6 @@ public class ContatoRestClientUsage {
                         Log.e("JSONException", e.getMessage());
                     } catch (UnsupportedEncodingException e) {
                         Log.e("UnsupportedEncoding", e.getMessage());
-                    } catch (ConnectTimeoutException e){
-                        Log.e("ConnectTimeoutException", e.getMessage());
                     }
                 }
             }
@@ -46,7 +44,7 @@ public class ContatoRestClientUsage {
         mainHandler.post(runnable);
     }
 
-    public void setPost(final Context context, final Contato contato) throws JSONException,UnsupportedEncodingException,ConnectTimeoutException{
+    public void setPost(final Context context, final Contato contato) throws JSONException,UnsupportedEncodingException{
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("nome", contato.getNome());
         jsonObject.put("email", contato.getEmail());
@@ -55,8 +53,7 @@ public class ContatoRestClientUsage {
         StringEntity entity = new StringEntity(jsonObject.toString());
         entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
 
-        ContatosRestClient client = new ContatosRestClient();
-        client.post(context, String.valueOf(R.string.API_CONTATO), entity, "application/json", new AsyncHttpResponseHandler() {
+        post(context, String.valueOf(R.string.API_CONTATO), entity, "application/json", new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 if (statusCode == 201) {//status created
@@ -78,11 +75,11 @@ public class ContatoRestClientUsage {
             }
         });
     }
-    public void getPublic(Long id) throws JSONException,UnsupportedEncodingException,ConnectTimeoutException{
+    public void getPublic(Long id) throws JSONException,UnsupportedEncodingException{
         String url = "";
         if(id!=null) url = "/"+id;
-        ContatosRestClient contatosRestClient = new ContatosRestClient();
-        contatosRestClient.get(String.valueOf(R.string.API_CONTATO)+url, null, new JsonHttpResponseHandler() {
+
+        get(String.valueOf(R.string.API_CONTATO)+url, null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 

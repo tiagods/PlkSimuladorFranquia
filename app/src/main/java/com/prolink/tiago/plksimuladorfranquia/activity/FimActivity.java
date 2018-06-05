@@ -10,25 +10,26 @@ import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.prolink.tiago.plksimuladorfranquia.MainActivity;
 import com.prolink.tiago.plksimuladorfranquia.R;
 
-public class FimActivity extends AppCompatActivity implements View.OnClickListener{
+public class FimActivity extends AppCompatActivity{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fim);
-        BootstrapButton concluir = (BootstrapButton)findViewById(R.id.btConcluirFim);
-        BootstrapButton refazer = (BootstrapButton)findViewById(R.id.btRefazerFim);
-        refazer.setOnClickListener(new View.OnClickListener() {
+
+        Runnable runnable = new Runnable() {
             @Override
-            public void onClick(View v) {
-                refazer();
+            public void run() {
+                try {
+                    Thread.sleep(5000);
+                    Intent intent = new Intent(FimActivity.this,MainActivity.class);
+                    startActivity(intent);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
             }
-        });
-        concluir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                concluir();
-            }
-        });
+        };
+        new Thread(runnable).start();
     }
 
     public void concluir() {
@@ -37,11 +38,6 @@ public class FimActivity extends AppCompatActivity implements View.OnClickListen
     }
     public void refazer() {
         Intent intent = new Intent(this,FranquiaEscolhaActivity.class);
-        startActivity(intent);
-    }
-    @Override
-    public void onClick(View v) {
-        Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
     }
 }

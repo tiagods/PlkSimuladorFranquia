@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //verificar se existe algum registro desincronizado e atualiza
         ContatoDAO dao = new ContatoDAO(this);
         List<Contato> contatos = dao.filtrarNaoSincronizados();
-        if (contatos.isEmpty()) {
+        if (!contatos.isEmpty()) {
             ContatoRestClientUsage rest = new ContatoRestClientUsage(this);
             rest.enviar(contatos);
         }

@@ -7,10 +7,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.prolink.tiago.plksimuladorfranquia.R;
+import com.prolink.tiago.plksimuladorfranquia.dao.FranquiaDAO;
 import com.prolink.tiago.plksimuladorfranquia.model.Franquia;
 import com.prolink.tiago.plksimuladorfranquia.model.FranquiaPacote;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 public class FranquiaDetalhesActivity extends AppCompatActivity implements View.OnClickListener{
+    private List<FranquiaPacote> pacotes;
+    private Franquia franquia;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,14 +38,18 @@ public class FranquiaDetalhesActivity extends AppCompatActivity implements View.
 		setContentView(tl);
 
 		*/
+
+        franquia = (Franquia)getIntent().getSerializableExtra("franquia");
+
+        FranquiaDAO franquiaDAO = new FranquiaDAO(this);
+        pacotes = new ArrayList<FranquiaPacote>();
+        pacotes.addAll(franquiaDAO.getPacotes(franquia));
+
     }
     @Override
     public void onClick(View view){
         Intent intent = new Intent(this,ResultadoActivity.class);
-        startActivity(intent);
-    }
-    public void escolhaFranquiaPacote(Franquia franquia, FranquiaPacote pacote){
-        Intent intent = new Intent(this, ResultadoActivity.class);
+        FranquiaPacote pacote = pacotes.get(0);
         pacote.setNome(franquia.getNome()+" - "+pacote.getNome());
         intent.putExtra("faturamento",pacote);
         startActivity(intent);

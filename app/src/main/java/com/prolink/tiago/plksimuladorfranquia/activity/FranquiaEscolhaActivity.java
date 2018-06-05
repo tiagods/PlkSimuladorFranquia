@@ -68,6 +68,10 @@ public class FranquiaEscolhaActivity extends AppCompatActivity{
                 Toast.makeText(FranquiaEscolhaActivity.this
                         , "ID: " + franquia.getId() + "\nName: " + franquia.getNome()+" - Abrir ?" +(position!=0?"Sim":"Nao"),
                         Toast.LENGTH_SHORT).show();
+
+                if(position!=0){
+                    franquia(franquia);
+                }
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapter) {  }
@@ -82,9 +86,9 @@ public class FranquiaEscolhaActivity extends AppCompatActivity{
         });
 
     }
-    private void franquia(CharSequence charSequence){
+    private void franquia(Franquia franquia){
         Intent intent = new Intent(this,FranquiaDetalhesActivity.class);
-        intent.putExtra("franquia",charSequence);
+        intent.putExtra("franquia",franquia);
         startActivity(intent);
     }
     private void rejeitar(){

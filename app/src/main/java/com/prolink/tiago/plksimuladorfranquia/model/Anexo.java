@@ -2,8 +2,11 @@ package com.prolink.tiago.plksimuladorfranquia.model;
 
 
 import java.io.Serializable;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 public class Anexo implements Serializable{
+    private NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt","BR"));
     public Anexo(){
 
     }
@@ -16,15 +19,19 @@ public class Anexo implements Serializable{
     }
 
     public enum Enquadramento{
-        ANEXO1("Anexo I"),ANEXO2("Anexo II"),ANEXO3("Anexo III"),ANEXO4("Anexo IV"),ANEXO5("Anexo V");
+        ANEXO1(1,"Anexo I"),ANEXO2(2,"Anexo II"),ANEXO3(3,"Anexo III"),ANEXO4(4,"Anexo IV"),ANEXO5(5,"Anexo V");
+        private int ordenacao;
         private String descricao;
-        Enquadramento(String descricao){
+        Enquadramento(int ordenacao,String descricao){
+            this.ordenacao = ordenacao;
             this.descricao=descricao;
         }
-
         @Override
         public String toString() {
             return this.descricao;
+        }
+        public int getOrdenacao() {
+            return ordenacao;
         }
     }
     private Enquadramento enquadramento;
@@ -75,6 +82,9 @@ public class Anexo implements Serializable{
 
     public boolean estaDentroDoLimite(double faturamento){
         return (faturamento >= valorInicial && faturamento<=valorFinal);
+    }
+    public String getValorImposto(double faturamento){
+        return nf.format((faturamento*aliquota)/100);
     }
 
     @Override

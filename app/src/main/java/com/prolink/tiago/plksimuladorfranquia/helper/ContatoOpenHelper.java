@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ContatoOpenHelper extends SQLiteOpenHelper {
-    //private static final String DATABASE_NAME = "plkabf";
     private static final String CONTATO_TABLE_NAME = "contato";
 
     public ContatoOpenHelper(Context context){
@@ -31,12 +30,11 @@ public class ContatoOpenHelper extends SQLiteOpenHelper {
                 "contato_id INTEGER"+
                 ");";
         db.execSQL(create);
-        db.close();
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        //db.execSQL("DROP TABLE IF EXISTS "+CONTATO_TABLE_NAME);
-        //onCreate(db);
+        db.execSQL("DROP TABLE IF EXISTS "+CONTATO_TABLE_NAME);
+        onCreate(db);
     }
 
     public void drop(){
@@ -44,17 +42,15 @@ public class ContatoOpenHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS "+CONTATO_TABLE_NAME);
         onCreate(db);
     }
-
-
     public void insert(Contato contato){
         ContentValues values = new ContentValues();
         values.put("nome", contato.getNome());
         values.put("telefone",contato.getTelefone());
         values.put("email",contato.getEmail());
         values.put("sincronizado",contato.getSincronizado());
+        values.put("contato_id",contato.getContato_id());
         SQLiteDatabase db = getWritableDatabase();
         db.insert(CONTATO_TABLE_NAME,null,values);
-        db.close();
     }
     public void update(Contato contato){
         ContentValues values = new ContentValues();
@@ -65,20 +61,16 @@ public class ContatoOpenHelper extends SQLiteOpenHelper {
         values.put("contato_id",contato.getContato_id());
         SQLiteDatabase db = getWritableDatabase();
         db.update(CONTATO_TABLE_NAME,values,"id="+contato.getId(),null);
-        db.close();
     }
     public List<Contato> getAll(){
         List<Contato> contatoList = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM "+CONTATO_TABLE_NAME,null);
-        if(res.getCount()>0) {
-            res.moveToFirst();
-            while (!res.isAfterLast()) {
-                contatoList.add(cursor(res));
-                res.moveToNext();
-            }
+        res.moveToFirst();
+        while (!res.isAfterLast()) {
+            contatoList.add(cursor(res));
+            res.moveToNext();
         }
-        db.close();
         return contatoList;
     }
 
@@ -90,7 +82,6 @@ public class ContatoOpenHelper extends SQLiteOpenHelper {
         if(res.moveToFirst()){
             contato = cursor(res);
         }
-        db.close();
         return contato;
     }
 
@@ -115,7 +106,6 @@ public class ContatoOpenHelper extends SQLiteOpenHelper {
             contatoList.add(cursor(res));
             res.moveToNext();
         }
-        db.close();
         return contatoList;
     }
 }

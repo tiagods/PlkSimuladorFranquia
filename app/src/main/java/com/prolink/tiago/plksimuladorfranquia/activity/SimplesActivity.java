@@ -35,7 +35,7 @@ import java.util.Set;
 
 public class SimplesActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt","BR"));
+    private NumberFormat nf = NumberFormat.getCurrencyInstance();
     private BootstrapEditText faturamento;
     private BootstrapEditText prolabore;
 
@@ -57,7 +57,6 @@ public class SimplesActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View view){
         if(!validar())
             return;
-
         Number fat = null;
         Number pro = null;
         try {
@@ -77,11 +76,11 @@ public class SimplesActivity extends AppCompatActivity implements View.OnClickLi
         try {
             Number fat = nf.parse(faturamento.getText().toString());
 
-            if(fat.doubleValue()>=4800000){
+            if(fat.doubleValue()>4800000.00){
                 exibirAlerta("O faturamento não pode ser superir a R$4.800.000,00 por ano!\nEntre em contato com um de nossos colaboradores!");
                 return false;
             }
-            if(fat.doubleValue()==0){
+            else if(fat.doubleValue()==0){
                 exibirAlerta("Faturamento informado é inválido!");
                 return false;
             }

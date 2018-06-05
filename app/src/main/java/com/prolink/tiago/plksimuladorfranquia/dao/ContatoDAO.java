@@ -12,37 +12,42 @@ import java.util.List;
 
 public class ContatoDAO {
     private Context context;
+    ContatoOpenHelper db;
 
     public ContatoDAO(Context context){
         this.context=context;
-        ContatoOpenHelper a = new ContatoOpenHelper(this.context);
-        a.drop();
-//        Log.i("MYAPP","Limpando Tabela de Contatos");
-//        for(Contato c : a.getAll()){
-//            Log.v("MYAPP",c.getId()+"\t "+c.getNome()+"\t "+c.getTelefone()+"\t "+c.getEmail());
-//        }
+        db = new ContatoOpenHelper(this.context);
+        db.drop();
+        Log.i("MYAPP","Limpando Tabela de Contatos");
+        for(Contato c : db.getAll()){
+            Log.v("MYAPP",c.getId()+"\t "+c.getNome()+"\t "+c.getTelefone()+"\t "+c.getEmail());
+        }
+        db.close();
     }
     public Contato cadastrar(String nome, String email, String telefone){
-        ContatoOpenHelper a = new ContatoOpenHelper(this.context);
+        db = new ContatoOpenHelper(this.context);
         Contato contato = new Contato();
         contato.setNome(nome);
         contato.setTelefone(telefone);
         contato.setEmail(email);
-        a.insert(contato);
-        contato = a.getLast();
-        for(Contato c : a.getAll()){
+        db.insert(contato);
+        contato = db.getLast();
+        for(Contato c : db.getAll()){
             Log.v("MYAPP",c.getId()+"\t "+c.getNome()+"\t "+c.getTelefone()+"\t "+c.getEmail());
         }
+        db.close();
         return contato;
     }
     public void atualizar(Contato contato){
-        ContatoOpenHelper a = new ContatoOpenHelper(this.context);
-        a.update(contato);
+        db = new ContatoOpenHelper(this.context);
+        db.update(contato);
+        db.close();
         Log.v("MYAPP",contato.getId()+"\t "+contato.getNome()+"\t "+contato.getTelefone()+"\t "+contato.getEmail());
     }
-
     public List<Contato> filtrarNaoSincronizados() {
-        ContatoOpenHelper a = new ContatoOpenHelper(this.context);
-        return a.filtrarNaoSincronizados();
+        db = new ContatoOpenHelper(this.context);
+        List<Contato> list = db.filtrarNaoSincronizados();
+        db.close();
+        return list;
     }
 }

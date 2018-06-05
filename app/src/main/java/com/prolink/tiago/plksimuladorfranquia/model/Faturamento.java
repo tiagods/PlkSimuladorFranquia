@@ -7,7 +7,6 @@ public abstract class Faturamento implements Serializable {
     private double faturamento = 0.00;
     private double icms = 0.00;
     private double prolabore=0.00;
-    private double aliquotaICMS=0.00;
     private double valorBaseICMS=0.00;
     private Tipo tipo = Tipo.SERVICO;
     public enum Tipo{
@@ -36,14 +35,6 @@ public abstract class Faturamento implements Serializable {
 
     public void setProlabore(double prolabore) {
         this.prolabore = prolabore;
-    }
-
-    public double getAliquotaICMS() {
-        return aliquotaICMS;
-    }
-
-    public void setAliquotaICMS(double aliquotaICMS) {
-        this.aliquotaICMS = aliquotaICMS;
     }
 
     public double getValorBaseICMS() {

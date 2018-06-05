@@ -46,18 +46,18 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
 
         String mensagem  = "Os seguintes campos são obrigatórios\n";
         boolean exibirErro = false;
-        if(!validarNome(nome.getText().toString())){
-            exibirErro=true;
-            mensagem+="Nome vazio\n";
-        }
-        if(!validarTelefone(telefone.getText().toString())){
-            exibirErro=true;
-            mensagem+="Telefone vazio ou invalido\n";
-        }
-        if(!validarEmail(email.getText().toString())){
-            exibirErro=true;
-            mensagem+="Email vazio ou invalido\n";
-        }
+//        if(!validarNome(nome.getText().toString())){
+//            exibirErro=true;
+//            mensagem+="Nome vazio\n";
+//        }
+//        if(!validarTelefone(telefone.getText().toString())){
+//            exibirErro=true;
+//            mensagem+="Telefone vazio ou invalido\n";
+//        }
+//        if(!validarEmail(email.getText().toString())){
+//            exibirErro=true;
+//            mensagem+="Email vazio ou invalido\n";
+//        }
         if(exibirErro){
             //Cria o gerador do AlertDialog
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
