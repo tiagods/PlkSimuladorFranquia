@@ -18,6 +18,16 @@ public class Franquia implements Serializable{
     private Calendar criadoEm;
     private Set<FranquiaPacote> pacotes= new HashSet<>();
 
+    public Franquia(){}
+
+    public Franquia(String nome){this.nome=nome;}
+
+    public Franquia(Long id,String nome, int ativo){
+        this.id = id;
+        this.nome=nome;
+        this.ativo=ativo;
+    };
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

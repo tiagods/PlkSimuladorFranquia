@@ -5,7 +5,9 @@ import android.util.Log;
 
 import com.prolink.tiago.plksimuladorfranquia.helper.ContatoOpenHelper;
 import com.prolink.tiago.plksimuladorfranquia.model.Contato;
+import com.prolink.tiago.plksimuladorfranquia.model.Franquia;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ContatoDAO {

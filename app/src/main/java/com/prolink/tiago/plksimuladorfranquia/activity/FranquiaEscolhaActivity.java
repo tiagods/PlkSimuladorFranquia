@@ -9,10 +9,17 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.prolink.tiago.plksimuladorfranquia.R;
+import com.prolink.tiago.plksimuladorfranquia.dao.FranquiaDAO;
 import com.prolink.tiago.plksimuladorfranquia.model.Contato;
+import com.prolink.tiago.plksimuladorfranquia.model.Franquia;
+import com.prolink.tiago.plksimuladorfranquia.util.FranquiaSpinAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FranquiaEscolhaActivity extends AppCompatActivity{
     @Override
@@ -25,12 +32,13 @@ public class FranquiaEscolhaActivity extends AppCompatActivity{
             Log.v("MYAPP","Recenbendo objeto cadastrado= "+this.getClass().getSimpleName()+"\t"+c.getNome()+"\t "+c.getTelefone()+"\t "+c.getEmail());
 
 
-        Spinner spinner = (Spinner)findViewById(R.id.spinner);
+        Spinner mySpinner = (Spinner)findViewById(R.id.spinner);
+
+    /*
         final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.franquias_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i != 0){
@@ -39,6 +47,30 @@ public class FranquiaEscolhaActivity extends AppCompatActivity{
             }
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
+        });
+*/
+
+        FranquiaDAO franquiaDAO = new FranquiaDAO(this);
+        List<Franquia> franquias = franquiaDAO.listarAtivos();
+        // And finally send the Users array (Your data)
+        final FranquiaSpinAdapter adapter = new FranquiaSpinAdapter(this,
+                android.R.layout.simple_spinner_item,
+                franquias);
+        mySpinner.setAdapter(adapter); // Set the custom adapter to the spinner
+        // You can create an anonymous listener to handle the event when is selected an spinner item
+        mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view,
+                                       int position, long id) {
+                Franquia franquia = adapter.getItem(position);
+                // Here you can do the action you want to...
+                Toast.makeText(FranquiaEscolhaActivity.this
+                        , "ID: " + franquia.getId() + "\nName: " + franquia.getNome()+" - Abrir ?" +(position!=0?"Sim":"Nao"),
+                        Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapter) {  }
         });
 
         BootstrapButton button = (BootstrapButton)findViewById(R.id.buttonRejeitar);
