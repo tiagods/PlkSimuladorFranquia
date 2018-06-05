@@ -2,4 +2,7 @@
 <resources>
     <string name="DATABASE_NAME">prolink</string>
     <string name="DATABASE_VERSION">1</string>
+    <string name="TABLE_CONTATO">contato</string>
+    <string name="TABLE_FRANQUIA">franquia</string>
+    <string name="TABLE_FRANQUIA_PACOTE">franquia_pacote</string>
 </resources>

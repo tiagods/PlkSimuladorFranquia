@@ -16,7 +16,16 @@ public class Anexo implements Serializable{
     }
 
     public enum Enquadramento{
-        ANEXO1,ANEXO2,ANEXO3,ANEXO4,ANEXO5;
+        ANEXO1("Anexo I"),ANEXO2("Anexo II"),ANEXO3("Anexo III"),ANEXO4("Anexo IV"),ANEXO5("Anexo V");
+        private String descricao;
+        Enquadramento(String descricao){
+            this.descricao=descricao;
+        }
+
+        @Override
+        public String toString() {
+            return this.descricao;
+        }
     }
     private Enquadramento enquadramento;
     private double valorInicial = 0.00;

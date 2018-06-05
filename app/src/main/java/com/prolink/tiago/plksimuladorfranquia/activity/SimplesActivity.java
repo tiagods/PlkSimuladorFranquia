@@ -35,7 +35,7 @@ import java.util.Set;
 
 public class SimplesActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private NumberFormat nf = NumberFormat.getCurrencyInstance();
+    private NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt","BR"));
     private BootstrapEditText faturamento;
     private BootstrapEditText prolabore;
 
@@ -68,8 +68,6 @@ public class SimplesActivity extends AppCompatActivity implements View.OnClickLi
         }
         Intent intent = new Intent(this,ResultadoActivity.class);
         FaturamentoConsumo faturamentoConsumo = new FaturamentoConsumo();
-        //Faturamento faturamentoConsumo = new FranquiaPacote();
-
         faturamentoConsumo.setFaturamento(fat.doubleValue());
         faturamentoConsumo.setProlabore(pro.doubleValue());
         intent.putExtra("faturamento",faturamentoConsumo);
@@ -78,28 +76,38 @@ public class SimplesActivity extends AppCompatActivity implements View.OnClickLi
     private boolean validar(){
         try {
             Number fat = nf.parse(faturamento.getText().toString());
-            if(fat.doubleValue()<=4800000) return true;//limite
-            else{
-                //Cria o gerador do AlertDialog
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                //define o titulo
-                builder.setTitle("Impossivel avançar");
-                //define a mensagem
-                builder.setMessage("O faturamento não pode ser superior a 4.800.000,00 por ano!");
-                //define um botão como positivo
-                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        Toast.makeText(SimplesActivity.this, "Ok=" + arg1, Toast.LENGTH_SHORT).show();
-                    }
-                });
-                //cria o AlertDialog
-                AlertDialog alerta = builder.create();
-                alerta.show();
+
+            if(fat.doubleValue()>=4800000){
+                exibirAlerta("O faturamento não pode ser superir a R$4.800.000,00 por ano!\nEntre em contato com um de nossos colaboradores!");
                 return false;
             }
+            if(fat.doubleValue()==0){
+                exibirAlerta("Faturamento informado é inválido!");
+                return false;
+            }
+            else return true;
+
         }catch (ParseException e){
             return false;
         }
+    }
+    private void exibirAlerta(String mensagem){
+
+        //Cria o gerador do AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //define o titulo
+        builder.setTitle("Impossivel avançar");
+        //define a mensagem
+        builder.setMessage(mensagem);
+        //define um botão como positivo
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+                Toast.makeText(SimplesActivity.this, "Ok=" + arg1, Toast.LENGTH_SHORT).show();
+            }
+        });
+        //cria o AlertDialog
+        AlertDialog alerta = builder.create();
+        alerta.show();
     }
 
 }

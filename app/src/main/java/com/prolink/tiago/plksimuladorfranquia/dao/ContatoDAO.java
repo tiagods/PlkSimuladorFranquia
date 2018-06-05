@@ -17,10 +17,10 @@ public class ContatoDAO {
         this.context=context;
         ContatoOpenHelper a = new ContatoOpenHelper(this.context);
         a.drop();
-        Log.i("MYAPP","Limpando Tabela de Contatos");
-        for(Contato c : a.getAll()){
-            Log.v("MYAPP",c.getId()+"\t "+c.getNome()+"\t "+c.getTelefone()+"\t "+c.getEmail());
-        }
+//        Log.i("MYAPP","Limpando Tabela de Contatos");
+//        for(Contato c : a.getAll()){
+//            Log.v("MYAPP",c.getId()+"\t "+c.getNome()+"\t "+c.getTelefone()+"\t "+c.getEmail());
+//        }
     }
     public Contato cadastrar(String nome, String email, String telefone){
         ContatoOpenHelper a = new ContatoOpenHelper(this.context);

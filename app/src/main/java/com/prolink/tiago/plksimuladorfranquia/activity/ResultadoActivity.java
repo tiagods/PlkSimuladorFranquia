@@ -28,11 +28,12 @@ import com.prolink.tiago.plksimuladorfranquia.model.FranquiaPacote;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 public class ResultadoActivity extends AppCompatActivity {
 
-    NumberFormat nf = NumberFormat.getCurrencyInstance();
+    NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt","BR"));
     LinearLayout linearLayout;
 
     @Override
@@ -73,18 +74,28 @@ public class ResultadoActivity extends AppCompatActivity {
             contruirTabelaFranquia(((FranquiaPacote)consumo));
         }
 
-        Set<Anexo> anexos = receberAnexos(consumo.getFaturamento());
 
+        Set<Anexo> anexos = receberAnexos(consumo.getFaturamento());
         String anexosNome="";
+        Anexo anexoMenor = null;
         for(Anexo a : anexos){
-                anexosNome+=a.getEnquadramento()+"->"+a.getAliquota()+".\t";
+            if(anexoMenor==null || anexoMenor.getAliquota()> a.getAliquota()) anexoMenor = a;
+
+            anexosNome+=a.getEnquadramento()+"->"+
+                    a.getAliquota()+"% = "+
+                    nf.format(consumo.getFaturamento()*a.getAliquota()/100)+
+                    "\n";
         }
-        texto1.setText("Para se enquadrar no Anexo XXX recomendamos que se tenha um ProLabore Mensal de R$");
+        texto1.setText(anexosNome);
+
+        texto2.setText("Para se enquadrar no Anexo XXX recomendamos que se tenha um ProLabore Mensal de R$");
         //Para se enquadrar no Anexo XXX recomendamos que se tenha um ProLabore Mensal de R$
 
-        texto2.setText("Considerando o Anexo xxx, sua empresa empresa pagará mensalmente xxx de tributos.");
+        texto3.setText("Considerando o Anexo xxx, sua empresa empresa pagará mensalmente "+
+                nf.format(consumo.getFaturamento()*anexoMenor.getAliquota()/100)+
+                " de tributos.");
         //texto2.setText("No primeiro mês sua franquia terá um custo de R$xxx, nos meses seguintes, R$xxx somando R$xxx de impostos e R$xxx de prolabore");
-        texto3.setText(anexosNome);
+
     }
     public TextView criarTextView(String text, int size, int backgroundColor, int foregroundColor){
         TextView tx = new TextView(this);
@@ -165,7 +176,6 @@ public class ResultadoActivity extends AppCompatActivity {
         franquiaTable.addView(tr4);
         //line separator 3
 //            franquiaTable.addView(new View(this));
-        linearLayout.addView(franquiaTable);
         linearLayout.addView(franquiaTable);
     }
     public void refazer() {
