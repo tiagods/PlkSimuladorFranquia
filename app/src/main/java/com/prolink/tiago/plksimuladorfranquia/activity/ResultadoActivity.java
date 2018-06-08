@@ -214,7 +214,7 @@ public class ResultadoActivity extends AppCompatActivity {
         //coluna 2
         tr3.addView(column("--",textSize,colorLine3,foregroundColor));
         //coluna 3
-        tr3.addView(column(nf.format(faturamento.getProlabore()),textSize,colorLine3,foregroundColor));
+        tr3.addView(column(nf.format(faturamento.getProLabore()),textSize,colorLine3,foregroundColor));
         franquiaTable.addView(tr3);
         //line separator 3
 //            franquiaTable.addView(new View(this));

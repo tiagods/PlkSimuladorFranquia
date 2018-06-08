@@ -6,32 +6,16 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
-import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.beardedhen.androidbootstrap.BootstrapEditText;
-import com.prolink.tiago.plksimuladorfranquia.MainActivity;
 import com.prolink.tiago.plksimuladorfranquia.R;
-import com.prolink.tiago.plksimuladorfranquia.config.AnexosConfig;
-import com.prolink.tiago.plksimuladorfranquia.dao.ContatoDAO;
-import com.prolink.tiago.plksimuladorfranquia.model.Anexo;
-import com.prolink.tiago.plksimuladorfranquia.model.Faturamento;
 import com.prolink.tiago.plksimuladorfranquia.model.FaturamentoConsumo;
-import com.prolink.tiago.plksimuladorfranquia.model.FranquiaPacote;
 import com.prolink.tiago.plksimuladorfranquia.util.MoneyTextWatcher;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Set;
 
 public class SimplesActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -68,7 +52,7 @@ public class SimplesActivity extends AppCompatActivity implements View.OnClickLi
         Intent intent = new Intent(this,ResultadoActivity.class);
         FaturamentoConsumo faturamentoConsumo = new FaturamentoConsumo();
         faturamentoConsumo.setFaturamento(fat.doubleValue());
-        faturamentoConsumo.setProlabore(pro.doubleValue());
+        faturamentoConsumo.setProLabore(pro.doubleValue());
         intent.putExtra("faturamento",faturamentoConsumo);
         startActivity(intent);
     }

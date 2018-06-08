@@ -18,6 +18,10 @@ public class Franquia implements Serializable{
     private Calendar criadoEm;
     private Set<FranquiaPacote> pacotes= new HashSet<>();
 
+    private Faturamento.Tipo tipo = Faturamento.Tipo.SERVICO;
+    public enum Tipo{
+        COMERCIO,SERVICO;
+    }
     public Franquia(){}
 
     public Franquia(String nome){this.nome=nome;}
@@ -87,6 +91,14 @@ public class Franquia implements Serializable{
 
     public void setPacotes(Set<FranquiaPacote> pacotes) {
         this.pacotes = pacotes;
+    }
+
+    public Faturamento.Tipo getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(Faturamento.Tipo tipo) {
+        this.tipo = tipo;
     }
 
     @Override

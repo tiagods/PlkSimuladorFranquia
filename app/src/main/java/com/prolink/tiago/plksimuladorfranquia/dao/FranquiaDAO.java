@@ -4,8 +4,6 @@ import android.content.Context;
 import android.util.Log;
 
 import com.prolink.tiago.plksimuladorfranquia.helper.FranquiaOpenHelper;
-import com.prolink.tiago.plksimuladorfranquia.model.Contato;
-import com.prolink.tiago.plksimuladorfranquia.model.Faturamento;
 import com.prolink.tiago.plksimuladorfranquia.model.Franquia;
 import com.prolink.tiago.plksimuladorfranquia.model.FranquiaPacote;
 
@@ -60,8 +58,8 @@ public class FranquiaDAO {
         fp.setFaturamento(50000.00);
         fp.setIcms(1.00);
         fp.setValorBaseICMS(50000.00);
-        fp.setProlabore(5000.00);
-        fp.setTipo(Faturamento.Tipo.COMERCIO);
+        fp.setProLabore(5000.00);
+        fp.setTipo(franquia.getTipo());
         pacotes.add(fp);
         return pacotes;
     }
