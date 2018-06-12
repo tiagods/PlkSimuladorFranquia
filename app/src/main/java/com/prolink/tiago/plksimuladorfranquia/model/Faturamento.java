@@ -8,10 +8,7 @@ public abstract class Faturamento implements Serializable {
     private double icms = 0.00;
     private double proLabore =0.00;
     private double valorBaseICMS=0.00;
-    private Tipo tipo = Tipo.SERVICO;
-    public enum Tipo{
-        COMERCIO,SERVICO;
-    }
+    private TipoServico tipo = TipoServico.SERVICO;
 
     public double getFaturamento() {
         return faturamento;
@@ -45,11 +42,11 @@ public abstract class Faturamento implements Serializable {
         this.valorBaseICMS = valorBaseICMS;
     }
 
-    public Tipo getTipo() {
+    public TipoServico getTipo() {
         return tipo;
     }
 
-    public void setTipo(Tipo tipo) {
+    public void setTipo(TipoServico tipo) {
         this.tipo = tipo;
     }
 }

@@ -8,7 +8,6 @@ import java.util.Locale;
 public class Anexo implements Serializable{
     private NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt","BR"));
     public Anexo(){
-
     }
     public Anexo(Enquadramento enquadramento,double valorInicial, double valorFinal, double aliquota, double descontoRecolhimento){
         this.enquadramento=enquadramento;
@@ -17,7 +16,6 @@ public class Anexo implements Serializable{
         this.aliquota=aliquota;
         this.descontoRecolhimento=descontoRecolhimento;
     }
-
     public enum Enquadramento{
         ANEXO1(1,"Anexo I"),ANEXO2(2,"Anexo II"),ANEXO3(3,"Anexo III"),ANEXO4(4,"Anexo IV"),ANEXO5(5,"Anexo V");
         private int ordenacao;
@@ -28,7 +26,7 @@ public class Anexo implements Serializable{
         }
         @Override
         public String toString() {
-            return this.descricao;
+            return this.descricao+" do Simples Nacional";
         }
         public int getOrdenacao() {
             return ordenacao;
@@ -39,7 +37,6 @@ public class Anexo implements Serializable{
     private double valorFinal = 0.00;
     private double aliquota;
     private double descontoRecolhimento = 0.00;
-
     public double getValorInicial() {
         return valorInicial;
     }

@@ -1,23 +1,35 @@
 package com.prolink.tiago.plksimuladorfranquia.config;
 
 import com.prolink.tiago.plksimuladorfranquia.model.Anexo;
+import com.prolink.tiago.plksimuladorfranquia.model.Faturamento;
+import com.prolink.tiago.plksimuladorfranquia.model.LucroPresumido;
+import com.prolink.tiago.plksimuladorfranquia.model.TipoServico;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-public class AnexosConfig {
-    private static AnexosConfig instance;
-    private Set<Anexo> anexoList = new HashSet<>();
+public class TributosConfig {
+    private static TributosConfig instance;
 
-    public static AnexosConfig getInstance() {
-        if(instance==null) instance = new AnexosConfig();
+    private static Set<Anexo> anexoList;
+    private static Set<LucroPresumido> lucroPresumido;
+
+    public static TributosConfig getInstance() {
+        if(instance==null) instance = new TributosConfig();
         return instance;
     }
 
-    public AnexosConfig(){
+    public TributosConfig(){
         initializer();
     }
     public void initializer() {
+        lucroPresumido = new HashSet<>();
+        anexoList = new HashSet<>();
+
         double linha1i = 0.00;
         double linha1f = 180000.00;
 
@@ -75,9 +87,29 @@ public class AnexosConfig {
         anexoList.add(new Anexo(Anexo.Enquadramento.ANEXO5, linha4i, linha4f, 20.50, 17100.00));
         anexoList.add(new Anexo(Anexo.Enquadramento.ANEXO5, linha5i, linha5f, 23.00, 62100.00));
         anexoList.add(new Anexo(Anexo.Enquadramento.ANEXO5, linha6i, linha6f, 30.50, 540000.00));
+
+
+        lucroPresumido.add(new LucroPresumido(TipoServico.COMERCIO,3,0.65,1.20,1.08));
+        lucroPresumido.add(new LucroPresumido(TipoServico.SERVICO,3,0.65,4.8,2.88));
     }
 
-    public Set<Anexo> getAnexoList() {
-        return anexoList;
+    public Anexo getAnexo(Faturamento faturamento) {
+        for(Anexo anexo : this.anexoList){
+//            if(anexo.estaDentroDoLimite(faturamento)) newAnexo.add(anexo);
+            if(anexo.estaDentroDoLimite(faturamento.getFaturamento()) && anexo.getEnquadramento().equals(Anexo.Enquadramento.ANEXO1)
+                    && faturamento.getTipo().equals(TipoServico.COMERCIO))
+                return anexo;
+            else if(anexo.estaDentroDoLimite(faturamento.getFaturamento()) && anexo.getEnquadramento().equals(Anexo.Enquadramento.ANEXO3)
+                    && faturamento.getTipo().equals(TipoServico.SERVICO))
+                return anexo;
+        }
+        return null;
+    }
+
+    public LucroPresumido getLucroPresumido(final Faturamento faturamento) {
+        for(LucroPresumido lucro : lucroPresumido){
+            if(lucro.getTipo().equals(faturamento.getTipo())) return lucro;
+        }
+        return null;
     }
 }
