@@ -19,19 +19,15 @@ public class FranquiaDAO {
     public FranquiaDAO(Context context){
         this.context=context;
         db = new FranquiaOpenHelper(this.context);
-        //a.drop();
-        //Log.v("MYAPP","Limpando Tabela de Contatos");
+        db.drop();
+        //Log.v("FRANQUIAS","Limpando Tabela de Franquias");
         //for(Franquia c : a.getAll()){
         //}
         db.close();
     }
 
-    public Franquia cadastrar(Long id, String nome, int ativo){
+    public Franquia cadastrar(Franquia franquia){
         db = new FranquiaOpenHelper(this.context);
-        Franquia franquia = new Franquia();
-        franquia.setId(id);
-        franquia.setNome(nome);
-        franquia.setAtivo(ativo);
         boolean existe = db.verificarSeExiste(franquia);
         if(existe){
             db.update(franquia);
@@ -41,26 +37,27 @@ public class FranquiaDAO {
         for(Franquia c : db.getAll()){
             Log.v("MYAPP",c.getId()+"\t "+c.getNome()+"\t "+c.getAtivo());
         }
+
         db.close();
         return franquia;
     }
     public Set<FranquiaPacote> getPacotes(Franquia franquia){
-//        db = new FranquiaOpenHelper(this.context);
-//        Set<FranquiaPacote> pacotes = db.getPacotes(franquia.getId());
-//        db.close();
-        Set<FranquiaPacote> pacotes = new HashSet<>();
-        FranquiaPacote fp = new FranquiaPacote();
-        fp.setFranquia_id(franquia.getId());
-        fp.setNome("Basic");
-        fp.setCusto(0.00);
-        fp.setInvestimento(200000.00);
-        fp.setPrevisao("2 anos");
-        fp.setFaturamento(50000.00);
-        fp.setIcms(1.00);
-        fp.setValorBaseICMS(50000.00);
-        fp.setProLabore(5000.00);
-        fp.setTipo(franquia.getTipo());
-        pacotes.add(fp);
+        db = new FranquiaOpenHelper(this.context);
+        Set<FranquiaPacote> pacotes = db.getPacotes(franquia.getId());
+        db.close();
+//        Set<FranquiaPacote> pacotes = new HashSet<>();
+//        FranquiaPacote fp = new FranquiaPacote();
+//        fp.setFranquia_id(franquia.getId());
+//        fp.setNome("Basic");
+//        fp.setCusto(0.00);
+//        fp.setInvestimento(200000.00);
+//        fp.setPrevisao("2 anos");
+//        fp.setFaturamento(50000.00);
+//        fp.setIcms(1.00);
+//        fp.setValorBaseICMS(50000.00);
+//        fp.setProLabore(5000.00);
+//        fp.setTipo(franquia.getTipo());
+//        pacotes.add(fp);
         return pacotes;
     }
 
@@ -71,13 +68,14 @@ public class FranquiaDAO {
         //Log.v("MYAPP",contato.getId()+"\t "+contato.getNome()+"\t "+contato.getTelefone()+"\t "+contato.getEmail());
     }
     public List<Franquia> listarAtivos() {
-        //db = new FranquiaOpenHelper(this.context);
-        //db.receberAtivos();
-        List<Franquia> fraquias = new ArrayList<Franquia>();
-        fraquias.add(new Franquia(-1L,"Selecione uma franquia",0));
-        fraquias.add(new Franquia(1L,"Mundo Cheff",1));
-        fraquias.add(new Franquia(2L,"Franquia Ficticia",1));
-        fraquias.add(new Franquia(3L,"Franquia Exemplo",1));
-        return fraquias;
+        db = new FranquiaOpenHelper(this.context);
+        List<Franquia> ativos = db.receberAtivos();
+        db.close();
+        return ativos;
+//        List<Franquia> fraquias = new ArrayList<Franquia>();
+//        fraquias.add(new Franquia(-1L,"Selecione uma franquia",0));
+//        fraquias.add(new Franquia(1L,"Mundo Cheff",1));
+//        fraquias.add(new Franquia(2L,"Franquia Ficticia",1));
+//        fraquias.add(new Franquia(3L,"Franquia Exemplo",1));
     }
 }

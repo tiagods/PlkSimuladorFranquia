@@ -8,8 +8,11 @@ import android.view.View;
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.prolink.tiago.plksimuladorfranquia.activity.CadastroActivity;
 import com.prolink.tiago.plksimuladorfranquia.dao.ContatoDAO;
+import com.prolink.tiago.plksimuladorfranquia.dao.FranquiaDAO;
 import com.prolink.tiago.plksimuladorfranquia.model.Contato;
+import com.prolink.tiago.plksimuladorfranquia.model.Franquia;
 import com.prolink.tiago.plksimuladorfranquia.resources.ContatoRestClientUsage;
+import com.prolink.tiago.plksimuladorfranquia.resources.FranquiasRestClientUsage;
 
 import java.util.List;
 
@@ -34,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ContatoRestClientUsage rest = new ContatoRestClientUsage(this);
             rest.enviar(contatos);
         }
+        FranquiasRestClientUsage restClientUsage = new FranquiasRestClientUsage(this);
+        restClientUsage.getPublic();
     }
     @Override
     public void onClick(View view){

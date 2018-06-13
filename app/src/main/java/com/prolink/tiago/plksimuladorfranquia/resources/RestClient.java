@@ -1,6 +1,7 @@
 package com.prolink.tiago.plksimuladorfranquia.resources;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -10,9 +11,10 @@ import com.prolink.tiago.plksimuladorfranquia.R;
 import cz.msebera.android.httpclient.HttpEntity;
 
 public abstract class RestClient {
-    private static final String BASE_URL = String.valueOf(R.string.API_HOST);
+    private static final String BASE_URL = "http://192.168.0.160:8080/api/";
     private static AsyncHttpClient client = new AsyncHttpClient();
     public static void get(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
+        Log.i("URLASYNC",getAbsoluteUrl(url));
         client.get(getAbsoluteUrl(url), params, responseHandler);
     }
     public static void post(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {

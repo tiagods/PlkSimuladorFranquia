@@ -11,12 +11,14 @@ import com.prolink.tiago.plksimuladorfranquia.model.Franquia;
 import com.prolink.tiago.plksimuladorfranquia.model.FranquiaPacote;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class FranquiaOpenHelper extends SQLiteOpenHelper {
+    private static SimpleDateFormat toDb = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private static final String FRANQUIA_TABLE_NAME = "franquia";
     private static final String FRANQUIA_PACOTE_TABLE_NAME ="franquia_pacote";
     public FranquiaOpenHelper(Context context) {
@@ -27,7 +29,10 @@ public class FranquiaOpenHelper extends SQLiteOpenHelper {
         String create1 = "CREATE TABLE "+FRANQUIA_TABLE_NAME+"(" +
                 "id INTEGER PRIMARY KEY," +
                 "nome VARCHAR," +
-                "ativo INTEGER" +
+                "ativo INTEGER," +
+                "tipo VARCHAR," +
+                "lastUpdate datetime," +
+                "criadoEm dateTime" +
                 ");";
         String create2 = "CREATE TABLE "+ FRANQUIA_PACOTE_TABLE_NAME +"(" +
                 "id INTEGER PRIMARY KEY," +
@@ -44,7 +49,6 @@ public class FranquiaOpenHelper extends SQLiteOpenHelper {
                 ")";
         db.execSQL(create1);
         db.execSQL(create2);
-        db.close();
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -58,25 +62,30 @@ public class FranquiaOpenHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS "+FRANQUIA_PACOTE_TABLE_NAME);
         onCreate(db);
     }
-
     public void insert(Franquia franquia){
         ContentValues values = new ContentValues();
         values.put("id", franquia.getNome());
         values.put("nome", franquia.getNome());
         values.put("ativo",franquia.getAtivo());
+        values.put("tipo", franquia.getTipo().toString());
+        values.put("lastUpdate",toDb.format(franquia.getLastUpdate().getTime()));
+        values.put("criadoEm",toDb.format(franquia.getCriadoEm().getTime()));
+
         SQLiteDatabase db = getWritableDatabase();
         db.insert(FRANQUIA_TABLE_NAME,null,values);
         db.delete(FRANQUIA_PACOTE_TABLE_NAME,"franquia_id="+franquia.getId(),null);
         for(FranquiaPacote pacote : franquia.getPacotes()){
             ContentValues values2 = obterContentPacotes(pacote);
-            db.insert(FRANQUIA_PACOTE_TABLE_NAME,null,values);
+            db.insert(FRANQUIA_PACOTE_TABLE_NAME,null,values2);
         }
-        db.close();
     }
     public void update(Franquia franquia){
         ContentValues values = new ContentValues();
         values.put("nome", franquia.getNome());
         values.put("ativo",franquia.getAtivo());
+        values.put("tipo", franquia.getTipo().toString());
+        values.put("lastUpdate",toDb.format(franquia.getLastUpdate().getTime()));
+        values.put("criadoEm",toDb.format(franquia.getCriadoEm().getTime()));
         SQLiteDatabase db = getWritableDatabase();
         db.update(FRANQUIA_TABLE_NAME,values,"id="+franquia.getId(),null);
         db.delete(FRANQUIA_PACOTE_TABLE_NAME,"franquia_id="+franquia.getId(),null);
@@ -84,16 +93,15 @@ public class FranquiaOpenHelper extends SQLiteOpenHelper {
             ContentValues values2 = obterContentPacotes(pacote);
             db.insert(FRANQUIA_PACOTE_TABLE_NAME,null,values);
         }
-        db.close();
     }
     private ContentValues obterContentPacotes(FranquiaPacote pacote){
         ContentValues values = new ContentValues();
         values.put("id",pacote.getId());
         values.put("nome",pacote.getId());
-        values.put("investimento",pacote.getId());
         values.put("custo",pacote.getCusto());
-        values.put("previsao",pacote.getPrevisao());
+        values.put("investimento",pacote.getId());
         values.put("faturamento",pacote.getFaturamento());
+        values.put("previsao",pacote.getPrevisao());
         values.put("icms",pacote.getIcms());
         values.put("franquia_id",pacote.getFranquia_id());
         return values;
@@ -108,7 +116,6 @@ public class FranquiaOpenHelper extends SQLiteOpenHelper {
             franquias.add(cursorFranquia(res));
             res.moveToNext();
         }
-        db.close();
         return franquias;
     }
     public Set<FranquiaPacote> getPacotes(long franquia_id){
@@ -123,7 +130,6 @@ public class FranquiaOpenHelper extends SQLiteOpenHelper {
                 res.moveToNext();
             }
         }
-        db.close();
         return pacotes;
     }
 
@@ -131,7 +137,7 @@ public class FranquiaOpenHelper extends SQLiteOpenHelper {
         Franquia c = new Franquia();
         c.setId(res.getLong(res.getColumnIndex("id")));
         c.setNome(res.getString(res.getColumnIndex("nome")));
-        c.setAtivo(res.getInt(res.getColumnIndex("telefone")));
+        c.setAtivo(res.getInt(res.getColumnIndex("ativo")));
         return c;
     }
     private FranquiaPacote cursorPacote(Cursor res){
@@ -151,7 +157,21 @@ public class FranquiaOpenHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         Cursor res = db.rawQuery(sql,null);
         int count = res.getCount();
-        db.close();
         return count>=1;
+    }
+    public void buscarUltimaAtualizacao(){
+
+    }
+    public List<Franquia> receberAtivos(){
+        List<Franquia> franquias = new ArrayList<>();
+        String sql="SELECT * FROM "+FRANQUIA_TABLE_NAME+" where ativo=1";
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor res = db.rawQuery(sql,null);
+        res.moveToFirst();
+        while(!res.isAfterLast()){
+            franquias.add(cursorFranquia(res));
+            res.moveToNext();
+        }
+        return franquias;
     }
 }

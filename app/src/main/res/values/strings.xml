@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Prolink Simulador</string>
+    <string name="app_name">Prolink Franquias 2018</string>
     <string name="button_avancar">Avançar</string>
     <!-- Menu Inicial-->
     <string name="descricao_main"></string>
@@ -15,7 +15,7 @@
     <string name="button_ignorar_franquia">Ignorar, não escolher uma franquia agora</string>
 
     <!--Area Detalhes da Franquia-->
-    <string name="descricao_detalhes">Abaixo detalhes da franquia, escolha uma opção para avançar na sua simulação</string>
+    <string name="descricao_detalhes">Abaixo os pacotes disponiveis da franquia, escolha uma opção para avançar na simulação</string>
     <string name="button_escolha">Simular</string>
 
     <!--Area Fim-->

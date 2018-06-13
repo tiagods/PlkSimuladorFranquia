@@ -19,6 +19,8 @@ import com.prolink.tiago.plksimuladorfranquia.model.Faturamento;
 import com.prolink.tiago.plksimuladorfranquia.model.FranquiaPacote;
 import com.prolink.tiago.plksimuladorfranquia.model.LucroPresumido;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -58,14 +60,23 @@ public class ResultadoActivity extends AppCompatActivity {
             }
         });
 
+        TableLayout tbFranquia = findViewById(R.id.tbFraquia);
+
         Faturamento consumo = (Faturamento) getIntent().getSerializableExtra("faturamento");
         if (consumo instanceof FranquiaPacote) {
-            contruirTabelaFranquia(((FranquiaPacote) consumo));
+            preencherTabelaFranquia((FranquiaPacote)consumo);
+
+        }
+        else{
+            tbFranquia.setVisibility(View.INVISIBLE);
         }
 
         Anexo anexo = TributosConfig.getInstance().getAnexo(consumo);
         LucroPresumido presumido = TributosConfig.getInstance().getLucroPresumido(consumo);
         presumido.calculaImposto(consumo.getFaturamento());
+
+        preencherTabelaSimples(anexo,consumo);
+        preencherTabelaPresumido(presumido);
 
         String tx1 = "";
         if (anexo!=null) {
@@ -102,8 +113,6 @@ public class ResultadoActivity extends AppCompatActivity {
 
         texto3.setText("");
 
-        contruirTabela(consumo,anexo);
-        contruirTabelaPresumido(presumido);
     }
     public void line(){
 
@@ -377,6 +386,53 @@ public class ResultadoActivity extends AppCompatActivity {
         franquiaTable.addView(view(black));
         franquiaTable.setBottom(20);
         linearLayout.addView(franquiaTable);
+    }
+
+    private void preencherTabelaFranquia(FranquiaPacote pacote){
+        TextView in= findViewById(R.id.txFranquiaInvestimento);
+        TextView re= findViewById(R.id.txFranquiaRetorno);
+        TextView fat = findViewById(R.id.txFranquiaFaturamento);
+        TextView nome = findViewById(R.id.txFranquiaNome);
+        in.setText(nf.format(pacote.getInvestimento()));
+        re.setText(pacote.getPrevisao());
+        fat.setText(nf.format(pacote.getFaturamento()));
+        nome.setText(pacote.getNome());
+    }
+    private void preencherTabelaPresumido(LucroPresumido presumido){
+        TextView txTxCofins = findViewById(R.id.txLPTaxaCofins);
+        TextView txVlCofins = findViewById(R.id.txLPValorCofins);
+        TextView txTxPis = findViewById(R.id.txLPTaxaPis);
+        TextView txVlPis = findViewById(R.id.txLPValorPis);
+        TextView txTxIrpj = findViewById(R.id.txLPTaxaIrpj);
+        TextView txVlIrpj = findViewById(R.id.txLPValorIrpj);
+        TextView txTxCsll = findViewById(R.id.txLPTaxaCsll);
+        TextView txVlCsll = findViewById(R.id.txLPValorCsll);
+        TextView txTxTotal = findViewById(R.id.txLPTaxaTotal);
+        TextView txVlTotal = findViewById(R.id.txLPTotal);
+
+        txTxCofins.setText(String.valueOf(presumido.getCofins()));
+        txVlCofins.setText(presumido.getTotalCofins());
+        txTxPis.setText(String.valueOf(presumido.getPis()));
+        txVlPis.setText(presumido.getTotalPis());
+        txTxIrpj.setText(String.valueOf(presumido.getIrpj()));
+        txVlIrpj.setText(presumido.getTotalIrpj());
+        txTxCsll.setText(String.valueOf(presumido.getCsll()));
+        txVlCsll.setText(presumido.getTotalCsll());
+        txTxTotal.setText(String.valueOf(presumido.getImposto()));
+        txVlTotal.setText(presumido.getTotalImposto());
+    }
+
+    private void preencherTabelaSimples(Anexo anexo,Faturamento faturamento){
+        TextView txPercImp = findViewById(R.id.txSNTaxaImposto);
+        TextView txPercFat = findViewById(R.id.txSNTaxaValor);
+        TextView txVlFat = findViewById(R.id.txSNValorFaturamento);
+        TextView txVlImp = findViewById(R.id.txSNValorImposto);
+
+        txPercImp.setText(new BigDecimal(anexo.getAliquota()).setScale(2, RoundingMode.HALF_UP).doubleValue()+"");
+
+        txPercFat.setText("--");
+        txVlFat.setText(nf.format(faturamento.getFaturamento()));
+        txVlImp.setText(anexo.getValorImposto(faturamento.getFaturamento()));
     }
 
     public void refazer() {

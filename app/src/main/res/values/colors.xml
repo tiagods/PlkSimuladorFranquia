@@ -7,7 +7,10 @@
 
     <color name="colorTableGrey">#99a399</color>
     <color name="colorTableRed">#F46542</color>
+    <color name="colorTableOrange">#F46542</color>
     <color name="colorTableGreen">#56a354</color>
     <color name="colorTableBlue">#303F9F</color>
     <color name="colorTableTextWhite">#FFFFFF</color>
+    <color name="colorTableTextBlack">#000000</color>
+    <color name="colorTable399c91">#399c91</color>
 </resources>

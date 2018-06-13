@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/descricao_cadastro"
-                android:textSize="24sp" />
+                android:textSize="18sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -36,11 +36,11 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="150dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Faturamento"
-                android:textSize="24sp" />
+                android:textSize="18sp" />
 
             <com.beardedhen.androidbootstrap.BootstrapEditText
                 android:id="@+id/txFaturamento"
@@ -50,7 +50,7 @@
                 android:maxWidth="100dp"
                 android:minWidth="100dp"
                 android:numeric="decimal"
-                app:bootstrapSize="xl"
+                app:bootstrapSize="lg"
                 app:roundedCorners="true" />
         </LinearLayout>
 
