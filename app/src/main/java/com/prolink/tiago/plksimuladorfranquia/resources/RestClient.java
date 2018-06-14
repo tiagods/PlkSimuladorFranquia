@@ -12,9 +12,11 @@ import cz.msebera.android.httpclient.HttpEntity;
 
 public abstract class RestClient {
     private static final String BASE_URL = "http://192.168.0.160:8080/api/";
+    public static final String API_CONTATO ="contatos";
+    public static final String API_FRANQUIAS ="franquias";
+
     private static AsyncHttpClient client = new AsyncHttpClient();
     public static void get(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
-        Log.i("URLASYNC",getAbsoluteUrl(url));
         client.get(getAbsoluteUrl(url), params, responseHandler);
     }
     public static void post(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {

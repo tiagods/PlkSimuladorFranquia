@@ -18,28 +18,32 @@ public class FranquiaDAO {
 
     public FranquiaDAO(Context context){
         this.context=context;
+    }
+    public void dropTable(){
         db = new FranquiaOpenHelper(this.context);
         db.drop();
-        //Log.v("FRANQUIAS","Limpando Tabela de Franquias");
-        //for(Franquia c : a.getAll()){
-        //}
         db.close();
     }
-
-    public Franquia cadastrar(Franquia franquia){
+    public void cadastrar(Franquia franquia){
         db = new FranquiaOpenHelper(this.context);
         boolean existe = db.verificarSeExiste(franquia);
-        if(existe){
+        boolean ehigual = db.verificarSeIgual(franquia);
+
+        if(existe && !ehigual) {
             db.update(franquia);
+            db.deletePacote(franquia);
+        }
+        else if(ehigual){
+            db.close();
+            return;
         }
         else
             db.insert(franquia);
-        for(Franquia c : db.getAll()){
-            Log.v("MYAPP",c.getId()+"\t "+c.getNome()+"\t "+c.getAtivo());
+        for(FranquiaPacote pacote : franquia.getPacotes()){
+            Log.v("PACOTE/INSERT", pacote.getNome());
+            db.insertPacote(pacote);
         }
-
         db.close();
-        return franquia;
     }
     public Set<FranquiaPacote> getPacotes(Franquia franquia){
         db = new FranquiaOpenHelper(this.context);
@@ -60,16 +64,17 @@ public class FranquiaDAO {
 //        pacotes.add(fp);
         return pacotes;
     }
-
     public void atualizar(Franquia franquia){
         db = new FranquiaOpenHelper(this.context);
         db.update(franquia);
         db.close();
-        //Log.v("MYAPP",contato.getId()+"\t "+contato.getNome()+"\t "+contato.getTelefone()+"\t "+contato.getEmail());
     }
     public List<Franquia> listarAtivos() {
         db = new FranquiaOpenHelper(this.context);
-        List<Franquia> ativos = db.receberAtivos();
+        List<Franquia> ativos = new ArrayList<>();
+        Franquia f = new Franquia(-1L,"Selecione uma franquia",1);
+        ativos.add(f);
+        ativos.addAll(db.receberAtivos());
         db.close();
         return ativos;
 //        List<Franquia> fraquias = new ArrayList<Franquia>();
@@ -77,5 +82,19 @@ public class FranquiaDAO {
 //        fraquias.add(new Franquia(1L,"Mundo Cheff",1));
 //        fraquias.add(new Franquia(2L,"Franquia Ficticia",1));
 //        fraquias.add(new Franquia(3L,"Franquia Exemplo",1));
+    }
+    public Franquia getUltimaVersao(){
+        db = new FranquiaOpenHelper(this.context);
+        Franquia franquia = db.pegarMaisNovo();
+        db.close();
+        return franquia;
+    }
+
+    public List<Franquia> getAll(){
+        db = new FranquiaOpenHelper(this.context);
+        List<Franquia> franquias = new ArrayList<>();
+        franquias.addAll(db.getAll());
+        db.close();
+        return franquias;
     }
 }

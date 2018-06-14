@@ -1,6 +1,7 @@
 package com.prolink.tiago.plksimuladorfranquia.resources;
 
 import android.content.Context;
+import android.text.format.DateUtils;
 import android.util.Log;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -15,6 +16,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.MalformedURLException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,10 +29,19 @@ import static java.lang.Boolean.TRUE;
 
 public class FranquiasRestClientUsage extends RestClient{
     private Context context;
+    private final SimpleDateFormat dateFormat= new SimpleDateFormat("ddMMyyyyHHmmss");
     public FranquiasRestClientUsage(Context context){
         this.context=context;
     }
-    public void getPublic() {
+    public void getPublic(Calendar periodo) {
+        String url="";
+        if(periodo!=null) {
+            Calendar calendar =Calendar.getInstance();
+            calendar.setTime(periodo.getTime());
+            calendar.add(Calendar.HOUR,-1);
+            url="/"+dateFormat.format(calendar.getTime())+"/periodo";
+        }
+        Log.v("PERIODO",url);
         get("franquias", null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -56,7 +69,6 @@ public class FranquiasRestClientUsage extends RestClient{
                         JSONArray arrayPack = jsonObject.getJSONArray("pacotes");
                         Set<FranquiaPacote> pacotes = new HashSet<>();
                         for(int j=0; j<arrayPack.length(); j++){
-
                             JSONObject jsonOb2 = arrayPack.getJSONObject(j);
                             FranquiaPacote pacote = new FranquiaPacote();
                             pacote.setId(jsonOb2.getLong("id"));;
@@ -71,32 +83,14 @@ public class FranquiasRestClientUsage extends RestClient{
                             pacote.setFranquia_id(franquia.getId());
                             pacotes.add(pacote);
                         }
+                        franquia.setPacotes(pacotes);
                         franquias.add(franquia);
                     }
                     for(Franquia franquia : franquias){
+                        Log.v("FRANQUIAREST", new SimpleDateFormat("dd//MM/yyyy HH:mm:ss").format(franquia.getLastUpdate().getTime()));
+
                         FranquiaDAO franquiaDAO = new FranquiaDAO(context);
                         franquiaDAO.cadastrar(franquia);
-                    }
-                }catch (JSONException e){
-                    Log.e("JSONException",e.getMessage());
-                }
-            }
-        });
-    }
-    public void getByTime(String lastTime) throws JSONException {
-        String url = "";
-        if(lastTime!=null) lastTime = lastTime+"/periodo";
-        get(String.valueOf(R.string.API_FRANQUIA)+lastTime, null, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-            }
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray jsonArray) {
-                try {
-                    JSONArray array = jsonArray;
-                    for (int i = 0; i < array.length(); i++) {
-                        JSONObject jsonObject = array.getJSONObject(i);
-                        Log.i("JSONResult", jsonObject.getString("nome"));
                     }
                 }catch (JSONException e){
                     Log.e("JSONException",e.getMessage());

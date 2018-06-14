@@ -5,14 +5,19 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.prolink.tiago.plksimuladorfranquia.R;
+import com.prolink.tiago.plksimuladorfranquia.config.DBConfig;
 import com.prolink.tiago.plksimuladorfranquia.model.Franquia;
 import com.prolink.tiago.plksimuladorfranquia.model.FranquiaPacote;
 
 import java.math.BigDecimal;
+import java.sql.Date;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -22,7 +27,7 @@ public class FranquiaOpenHelper extends SQLiteOpenHelper {
     private static final String FRANQUIA_TABLE_NAME = "franquia";
     private static final String FRANQUIA_PACOTE_TABLE_NAME ="franquia_pacote";
     public FranquiaOpenHelper(Context context) {
-        super(context, String.valueOf(R.string.DATABASE_NAME),null,R.string.DATABASE_VERSION);
+        super(context, DBConfig.DATABASE,null,DBConfig.DATABASE_VERSION);
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -31,8 +36,7 @@ public class FranquiaOpenHelper extends SQLiteOpenHelper {
                 "nome VARCHAR," +
                 "ativo INTEGER," +
                 "tipo VARCHAR," +
-                "lastUpdate datetime," +
-                "criadoEm dateTime" +
+                "lastUpdate DATETIME" +
                 ");";
         String create2 = "CREATE TABLE "+ FRANQUIA_PACOTE_TABLE_NAME +"(" +
                 "id INTEGER PRIMARY KEY," +
@@ -64,20 +68,14 @@ public class FranquiaOpenHelper extends SQLiteOpenHelper {
     }
     public void insert(Franquia franquia){
         ContentValues values = new ContentValues();
-        values.put("id", franquia.getNome());
+        values.put("id", franquia.getId());
         values.put("nome", franquia.getNome());
         values.put("ativo",franquia.getAtivo());
         values.put("tipo", franquia.getTipo().toString());
         values.put("lastUpdate",toDb.format(franquia.getLastUpdate().getTime()));
-        values.put("criadoEm",toDb.format(franquia.getCriadoEm().getTime()));
 
         SQLiteDatabase db = getWritableDatabase();
         db.insert(FRANQUIA_TABLE_NAME,null,values);
-        db.delete(FRANQUIA_PACOTE_TABLE_NAME,"franquia_id="+franquia.getId(),null);
-        for(FranquiaPacote pacote : franquia.getPacotes()){
-            ContentValues values2 = obterContentPacotes(pacote);
-            db.insert(FRANQUIA_PACOTE_TABLE_NAME,null,values2);
-        }
     }
     public void update(Franquia franquia){
         ContentValues values = new ContentValues();
@@ -85,21 +83,26 @@ public class FranquiaOpenHelper extends SQLiteOpenHelper {
         values.put("ativo",franquia.getAtivo());
         values.put("tipo", franquia.getTipo().toString());
         values.put("lastUpdate",toDb.format(franquia.getLastUpdate().getTime()));
-        values.put("criadoEm",toDb.format(franquia.getCriadoEm().getTime()));
         SQLiteDatabase db = getWritableDatabase();
         db.update(FRANQUIA_TABLE_NAME,values,"id="+franquia.getId(),null);
-        db.delete(FRANQUIA_PACOTE_TABLE_NAME,"franquia_id="+franquia.getId(),null);
-        for(FranquiaPacote pacote : franquia.getPacotes()){
-            ContentValues values2 = obterContentPacotes(pacote);
-            db.insert(FRANQUIA_PACOTE_TABLE_NAME,null,values);
-        }
+
     }
+    public void deletePacote(Franquia franquia){
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(FRANQUIA_PACOTE_TABLE_NAME,"franquia_id="+franquia.getId(),null);
+    }
+    public void insertPacote(FranquiaPacote pacote){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values2 = obterContentPacotes(pacote);
+        db.insert(FRANQUIA_PACOTE_TABLE_NAME,null,values2);
+    }
+
     private ContentValues obterContentPacotes(FranquiaPacote pacote){
         ContentValues values = new ContentValues();
         values.put("id",pacote.getId());
         values.put("nome",pacote.getId());
         values.put("custo",pacote.getCusto());
-        values.put("investimento",pacote.getId());
+        values.put("investimento",pacote.getInvestimento());
         values.put("faturamento",pacote.getFaturamento());
         values.put("previsao",pacote.getPrevisao());
         values.put("icms",pacote.getIcms());
@@ -138,6 +141,14 @@ public class FranquiaOpenHelper extends SQLiteOpenHelper {
         c.setId(res.getLong(res.getColumnIndex("id")));
         c.setNome(res.getString(res.getColumnIndex("nome")));
         c.setAtivo(res.getInt(res.getColumnIndex("ativo")));
+        try {
+            java.util.Date data = toDb.parse(res.getString(res.getColumnIndex("lastUpdate")));
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(data);
+            c.setLastUpdate(calendar);
+        } catch (ParseException e) {
+            Log.e("DateException",e.getMessage());
+        }
         return c;
     }
     private FranquiaPacote cursorPacote(Cursor res){
@@ -159,8 +170,23 @@ public class FranquiaOpenHelper extends SQLiteOpenHelper {
         int count = res.getCount();
         return count>=1;
     }
-    public void buscarUltimaAtualizacao(){
-
+    public boolean verificarSeIgual(Franquia franquia) {
+        String sql="SELECT * FROM "+FRANQUIA_TABLE_NAME+" where id="+franquia.getId()+
+                " and lastUpdate='"+toDb.format(franquia.getLastUpdate().getTime())+"'";
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor res = db.rawQuery(sql,null);
+        int count = res.getCount();
+        return count>=1;
+    }
+    public Franquia pegarMaisNovo(){
+        String sql="SELECT * FROM "+FRANQUIA_TABLE_NAME+" order by lastUpdate desc limit 1";
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor res = db.rawQuery(sql,null);
+        res.moveToFirst();
+        if(res.getCount()>0) {
+            return (cursorFranquia(res));
+        }
+        return null;
     }
     public List<Franquia> receberAtivos(){
         List<Franquia> franquias = new ArrayList<>();

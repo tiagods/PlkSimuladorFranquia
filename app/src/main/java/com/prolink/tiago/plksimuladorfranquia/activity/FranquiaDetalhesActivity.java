@@ -21,7 +21,6 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Set;
 
 public class FranquiaDetalhesActivity extends AppCompatActivity{
     NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt","BR"));
@@ -44,9 +43,12 @@ public class FranquiaDetalhesActivity extends AppCompatActivity{
         Button button3 = findViewById(R.id.btSimular3);
 
         TextView txIn1 = findViewById(R.id.txInvestimento1);
-        TextView txIn2 = findViewById(R.id.txInvestimento1);
-        TextView txIn3 = findViewById(R.id.txInvestimento1);
+        TextView txIn2 = findViewById(R.id.txInvestimento2);
+        TextView txIn3 = findViewById(R.id.txInvestimento3);
 
+        TextView txFa1 = findViewById(R.id.txFaturamento1);
+        TextView txFa2 = findViewById(R.id.txFaturamento2);
+        TextView txFa3 = findViewById(R.id.txFaturamento3);
 
         TextView txRe1 = findViewById(R.id.txRetorno1);
         TextView txRe2 = findViewById(R.id.txRetorno2);
@@ -66,21 +68,26 @@ public class FranquiaDetalhesActivity extends AppCompatActivity{
         else{
             FranquiaPacote p = pacotes.get(0);
             txIn1.setText(nf.format(p.getInvestimento()));
+            txFa1.setText(nf.format(p.getFaturamento()));
             txRe1.setText(p.getPrevisao());
             if(pacotes.size()==1){
                 tb2.setVisibility(View.INVISIBLE);
                 tb3.setVisibility(View.INVISIBLE);
             }
-            else if(pacotes.size()==2){
+            else {
                 FranquiaPacote p2 = pacotes.get(1);
                 txIn2.setText(nf.format(p2.getInvestimento()));
+                txFa2.setText(nf.format(p2.getFaturamento()));
                 txRe2.setText(p2.getPrevisao());
-                tb3.setVisibility(View.INVISIBLE);
-            }
-            else{
-                FranquiaPacote p3 = pacotes.get(1);
-                txIn3.setText(nf.format(p3.getInvestimento()));
-                txRe3.setText(p3.getPrevisao());
+
+                if(pacotes.size()==2)
+                    tb3.setVisibility(View.INVISIBLE);
+                else{
+                    FranquiaPacote p3 = pacotes.get(2);
+                    txIn3.setText(nf.format(p3.getInvestimento()));
+                    txFa3.setText(nf.format(p3.getFaturamento()));
+                    txRe3.setText(p3.getPrevisao());
+                }
             }
         }
         button1.setOnClickListener(new View.OnClickListener() {

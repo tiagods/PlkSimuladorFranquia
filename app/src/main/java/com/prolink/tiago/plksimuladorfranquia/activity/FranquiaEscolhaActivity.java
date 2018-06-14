@@ -34,22 +34,6 @@ public class FranquiaEscolhaActivity extends AppCompatActivity{
 
         Spinner mySpinner = (Spinner)findViewById(R.id.spinner);
 
-    /*
-        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.franquias_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i != 0){
-                    franquia(adapter.getItem(i));
-                }
-            }
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        });
-*/
-
         FranquiaDAO franquiaDAO = new FranquiaDAO(this);
         List<Franquia> franquias = franquiaDAO.listarAtivos();
         // And finally send the Users array (Your data)
@@ -64,11 +48,6 @@ public class FranquiaEscolhaActivity extends AppCompatActivity{
             public void onItemSelected(AdapterView<?> adapterView, View view,
                                        int position, long id) {
                 Franquia franquia = adapter.getItem(position);
-                // Here you can do the action you want to...
-                Toast.makeText(FranquiaEscolhaActivity.this
-                        , "ID: " + franquia.getId() + "\nName: " + franquia.getNome()+" - Abrir ?" +(position!=0?"Sim":"Nao"),
-                        Toast.LENGTH_SHORT).show();
-
                 if(position!=0){
                     franquia(franquia);
                 }

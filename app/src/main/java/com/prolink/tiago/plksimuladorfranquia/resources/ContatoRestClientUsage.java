@@ -53,7 +53,7 @@ public class ContatoRestClientUsage extends RestClient{
         StringEntity entity = new StringEntity(jsonObject.toString());
         entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
 
-        post(context, String.valueOf(R.string.API_CONTATO), entity, "application/json", new AsyncHttpResponseHandler() {
+        post(context, this.API_CONTATO, entity, "application/json", new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 if (statusCode == 201) {//status created
@@ -79,7 +79,7 @@ public class ContatoRestClientUsage extends RestClient{
         String url = "";
         if(id!=null) url = "/"+id;
 
-        get(String.valueOf(R.string.API_CONTATO)+url, null, new JsonHttpResponseHandler() {
+        get(this.API_CONTATO+url, null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 

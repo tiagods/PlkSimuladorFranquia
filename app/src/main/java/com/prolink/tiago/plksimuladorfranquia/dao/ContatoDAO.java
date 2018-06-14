@@ -13,9 +13,10 @@ import java.util.List;
 public class ContatoDAO {
     private Context context;
     ContatoOpenHelper db;
-
     public ContatoDAO(Context context){
         this.context=context;
+    }
+    public void dropTable(){
         db = new ContatoOpenHelper(this.context);
         db.drop();
         Log.i("MYAPP","Limpando Tabela de Contatos");

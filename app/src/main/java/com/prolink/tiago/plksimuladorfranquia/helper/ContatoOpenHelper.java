@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.prolink.tiago.plksimuladorfranquia.R;
+import com.prolink.tiago.plksimuladorfranquia.config.DBConfig;
 import com.prolink.tiago.plksimuladorfranquia.model.Contato;
 
 import java.math.BigDecimal;
@@ -17,7 +18,7 @@ public class ContatoOpenHelper extends SQLiteOpenHelper {
     private static final String CONTATO_TABLE_NAME = "contato";
 
     public ContatoOpenHelper(Context context){
-        super(context, String.valueOf(R.string.DATABASE_NAME),null,R.string.DATABASE_VERSION);
+        super(context, DBConfig.DATABASE,null, DBConfig.DATABASE_VERSION);
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
