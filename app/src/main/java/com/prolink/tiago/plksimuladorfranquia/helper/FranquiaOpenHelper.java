@@ -27,7 +27,7 @@ public class FranquiaOpenHelper extends SQLiteOpenHelper {
     private static final String FRANQUIA_TABLE_NAME = "franquia";
     private static final String FRANQUIA_PACOTE_TABLE_NAME ="franquia_pacote";
     public FranquiaOpenHelper(Context context) {
-        super(context, DBConfig.DATABASE,null,DBConfig.DATABASE_VERSION);
+        super(context, "plkfranquias2018",null,1);
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -50,7 +50,7 @@ public class FranquiaOpenHelper extends SQLiteOpenHelper {
                 "prolabore DECIMAL(10,2)," +
                 "base_icms DECIMAL(10,2)," +
                 "tipo VARCHAR" +
-                ")";
+                ");";
         db.execSQL(create1);
         db.execSQL(create2);
     }
@@ -73,7 +73,6 @@ public class FranquiaOpenHelper extends SQLiteOpenHelper {
         values.put("ativo",franquia.getAtivo());
         values.put("tipo", franquia.getTipo().toString());
         values.put("lastUpdate",toDb.format(franquia.getLastUpdate().getTime()));
-
         SQLiteDatabase db = getWritableDatabase();
         db.insert(FRANQUIA_TABLE_NAME,null,values);
     }
@@ -114,10 +113,12 @@ public class FranquiaOpenHelper extends SQLiteOpenHelper {
         List<Franquia> franquias = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM "+FRANQUIA_TABLE_NAME,null);
-        res.moveToFirst();
-        while(!res.isAfterLast()){
-            franquias.add(cursorFranquia(res));
-            res.moveToNext();
+        if(res.getCount()>0) {
+            res.moveToFirst();
+            while (!res.isAfterLast()) {
+                franquias.add(cursorFranquia(res));
+                res.moveToNext();
+            }
         }
         return franquias;
     }
@@ -193,10 +194,12 @@ public class FranquiaOpenHelper extends SQLiteOpenHelper {
         String sql="SELECT * FROM "+FRANQUIA_TABLE_NAME+" where ativo=1";
         SQLiteDatabase db = getReadableDatabase();
         Cursor res = db.rawQuery(sql,null);
-        res.moveToFirst();
-        while(!res.isAfterLast()){
-            franquias.add(cursorFranquia(res));
-            res.moveToNext();
+        if(res.getCount()>0) {
+            res.moveToFirst();
+            while (!res.isAfterLast()) {
+                franquias.add(cursorFranquia(res));
+                res.moveToNext();
+            }
         }
         return franquias;
     }

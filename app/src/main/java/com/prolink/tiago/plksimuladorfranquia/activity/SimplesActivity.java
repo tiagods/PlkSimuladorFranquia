@@ -59,8 +59,8 @@ public class SimplesActivity extends AppCompatActivity implements View.OnClickLi
         try {
             Number fat = nf.parse(faturamento.getText().toString());
 
-            if(fat.doubleValue()>4800000.00){
-                exibirAlerta("O faturamento não pode ser superir a R$4.800.000,00 por ano!\nEntre em contato com um de nossos especialistas!");
+            if(fat.doubleValue()>6500000){
+                exibirAlerta("O faturamento não pode ser superir a R$6.500.000,00 por ano!\nEntre em contato com um de nossos especialistas!");
                 return false;
             }
             else if(fat.doubleValue()==0){

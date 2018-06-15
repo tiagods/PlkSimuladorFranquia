@@ -61,25 +61,23 @@ public class ResultadoActivity extends AppCompatActivity {
         });
 
         TableLayout tbFranquia = findViewById(R.id.tbFraquia);
+        TableLayout tbSimples = findViewById(R.id.tbSimples);
 
         Faturamento consumo = (Faturamento) getIntent().getSerializableExtra("faturamento");
         if (consumo instanceof FranquiaPacote) {
             preencherTabelaFranquia((FranquiaPacote)consumo);
-
         }
         else{
-            tbFranquia.setVisibility(View.INVISIBLE);
+            linearLayout.removeView(tbFranquia);
         }
-
         Anexo anexo = TributosConfig.getInstance().getAnexo(consumo);
         LucroPresumido presumido = TributosConfig.getInstance().getLucroPresumido(consumo);
         presumido.calculaImposto(consumo.getFaturamento());
 
         preencherTabelaSimples(anexo,consumo);
         preencherTabelaPresumido(presumido);
-
         String tx1 = "";
-        if (anexo!=null) {
+        if (anexo!=null && consumo.getFaturamento()<=400000) {
             tx1+= anexo.getEnquadramento() + "->" +
                     anexo.getAliquota() + "% = " +
                     anexo.getValorImposto(consumo.getFaturamento()) +
@@ -96,15 +94,23 @@ public class ResultadoActivity extends AppCompatActivity {
         String nome="";
         String valorImposto="";
         double imposto=0;
-        if(anexo.getAliquota()>presumido.getImposto()){
+        if(consumo.getFaturamento()>400000) {
             nome = "Lucro Presumido";
             valorImposto = presumido.getTotalImposto();
             imposto = presumido.getImposto();
+            linearLayout.removeView(tbSimples);
         }
         else{
-            nome = anexo.getEnquadramento().toString();
-            valorImposto = anexo.getValorImposto(consumo.getFaturamento());
-            imposto = anexo.getAliquota();
+            if (anexo.getAliquota() > presumido.getImposto()) {
+                nome = "Lucro Presumido";
+                valorImposto = presumido.getTotalImposto();
+                imposto = presumido.getImposto();
+            }
+            else {
+                nome = anexo.getEnquadramento().toString();
+                valorImposto = anexo.getValorImposto(consumo.getFaturamento());
+                imposto = anexo.getAliquota();
+            }
         }
         texto2.setText("Considerando o "+nome+", sua empresa pagará mensalmente "+
                 valorImposto+

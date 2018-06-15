@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestHandle;
 import com.loopj.android.http.RequestParams;
 import com.prolink.tiago.plksimuladorfranquia.R;
 
@@ -16,6 +17,7 @@ public abstract class RestClient {
     public static final String API_FRANQUIAS ="franquias";
 
     private static AsyncHttpClient client = new AsyncHttpClient();
+
     public static void get(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
         client.get(getAbsoluteUrl(url), params, responseHandler);
     }
@@ -28,4 +30,6 @@ public abstract class RestClient {
     private static String getAbsoluteUrl(String relativeUrl) {
         return BASE_URL + relativeUrl;
     }
+
+
 }

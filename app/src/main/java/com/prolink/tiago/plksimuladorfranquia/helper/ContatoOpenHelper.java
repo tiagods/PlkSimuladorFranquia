@@ -16,9 +16,12 @@ import java.util.List;
 
 public class ContatoOpenHelper extends SQLiteOpenHelper {
     private static final String CONTATO_TABLE_NAME = "contato";
+    private static final String FRANQUIA_TABLE_NAME = "franquia";
+    private static final String FRANQUIA_PACOTE_TABLE_NAME ="franquia_pacote";
 
     public ContatoOpenHelper(Context context){
-        super(context, DBConfig.DATABASE,null, DBConfig.DATABASE_VERSION);
+//        super(context, DBConfig.DATABASE,null, DBConfig.DATABASE_VERSION);
+        super(context, "plkfranquias2018",null,1);
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -30,17 +33,44 @@ public class ContatoOpenHelper extends SQLiteOpenHelper {
                 "sincronizado INTEGER," +
                 "contato_id INTEGER"+
                 ");";
+        String create1 = "CREATE TABLE "+FRANQUIA_TABLE_NAME+"(" +
+                "id INTEGER PRIMARY KEY," +
+                "nome VARCHAR," +
+                "ativo INTEGER," +
+                "tipo VARCHAR," +
+                "lastUpdate DATETIME" +
+                ");";
+        String create2 = "CREATE TABLE "+ FRANQUIA_PACOTE_TABLE_NAME +"(" +
+                "id INTEGER PRIMARY KEY," +
+                "nome VARCHAR," +
+                "franquia_id INTEGER," +
+                "custo DECIMAL(10,2)," +
+                "investimento DECIMAL(10,2)," +
+                "previsao VARCHAR," +
+                "faturamento DECIMAL(10,2)," +
+                "icms DECIMAL(10,2)," +
+                "prolabore DECIMAL(10,2)," +
+                "base_icms DECIMAL(10,2)," +
+                "tipo VARCHAR" +
+                ");";
+
         db.execSQL(create);
+        db.execSQL(create1);
+        db.execSQL(create2);
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS "+CONTATO_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS "+FRANQUIA_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS "+FRANQUIA_PACOTE_TABLE_NAME);
         onCreate(db);
     }
 
     public void drop(){
         SQLiteDatabase db  = getWritableDatabase();
         db.execSQL("DROP TABLE IF EXISTS "+CONTATO_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS "+FRANQUIA_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS "+FRANQUIA_PACOTE_TABLE_NAME);
         onCreate(db);
     }
     public void insert(Contato contato){
@@ -67,10 +97,12 @@ public class ContatoOpenHelper extends SQLiteOpenHelper {
         List<Contato> contatoList = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM "+CONTATO_TABLE_NAME,null);
-        res.moveToFirst();
-        while (!res.isAfterLast()) {
-            contatoList.add(cursor(res));
-            res.moveToNext();
+        if(res.getCount()>0) {
+            res.moveToFirst();
+            while (!res.isAfterLast()) {
+                contatoList.add(cursor(res));
+                res.moveToNext();
+            }
         }
         return contatoList;
     }
@@ -102,10 +134,12 @@ public class ContatoOpenHelper extends SQLiteOpenHelper {
         String sql="SELECT * FROM "+CONTATO_TABLE_NAME+" where sincronizado=0";
         SQLiteDatabase db = getReadableDatabase();
         Cursor res = db.rawQuery(sql,null);
-        res.moveToFirst();
-        while(!res.isAfterLast()){
-            contatoList.add(cursor(res));
-            res.moveToNext();
+        if(res.getCount()>0) {
+            res.moveToFirst();
+            while (!res.isAfterLast()) {
+                contatoList.add(cursor(res));
+                res.moveToNext();
+            }
         }
         return contatoList;
     }
