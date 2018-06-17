@@ -28,6 +28,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
+import cz.msebera.android.httpclient.client.HttpResponseException;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -35,9 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView txVersao;
 
     private Class entity = FranquiaEscolhaActivity.class;
-    private String APP_REGISTRADO="app_registro";
     private String APP_COMERCIAL = "app_comercial";
-
     private String APP_CHAVE = "app_chave";
 
 
@@ -46,19 +46,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        button = (BootstrapButton)findViewById(R.id.button);
+        button = findViewById(R.id.button);
         txVersao = findViewById(R.id.txVersao);
 
         button.setOnClickListener(MainActivity.this);
 
         executarAtualizacao();
         executarVerificacao();
-    }
-
-    void adicionar(String value,boolean result){
-        SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
-        editor.putBoolean(value,result);
-        editor.apply();
     }
     void adicionarChave(String value,String result){
         SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(this).edit();
@@ -67,7 +61,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     @Override
     public void onClick(View view){
-        //CadastroActivity.class
         startActivity(new Intent(this,entity));
     }
     private void executarAtualizacao(){
@@ -89,35 +82,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     private void executarVerificacao(){
         SharedPreferences preferences1 = PreferenceManager.getDefaultSharedPreferences(this);
+        String comercialUse = " : ";
         if(!preferences1.contains(APP_CHAVE)){
             adicionarChave(APP_CHAVE, gerarSerial());
         }
         if(!preferences1.contains(APP_COMERCIAL)){
             register(preferences1);
-            Log.i("COMERCIAL","SETANDO COMERCIAL...");
+            Log.i("COMERCIAL","SETANDO COMERCIAL: "+preferences1.getString(APP_CHAVE,"defaultStringIfNothingFound"));
         }
         else if(preferences1.contains(APP_COMERCIAL)){
             entity = CadastroActivity.class;
+            comercialUse = " COMERCIAL :";
             Log.i("COMERCIAL","COMERCIAL ATIVO...");
         }
         else{
             entity = FranquiaEscolhaActivity.class;
             Log.i("FRANQUIA","SETANDO FRANQUIA..."+preferences1.getString(APP_CHAVE,"defaultStringIfNothingFound"));
         }
-        txVersao.setText(preferences1.getString(APP_CHAVE,"defaultStringIfNothingFound"));
+        txVersao.setText("ID"+comercialUse+preferences1.getString(APP_CHAVE,"defaultStringIfNothingFound"));
     }
     void register(SharedPreferences preferences1){
         RegistroRestClientUsage registro = new RegistroRestClientUsage(this);
-        registro.verificarRegistro(preferences1.getString(APP_CHAVE,"defaultStringIfNothingFound"));
-        int code = registro.getCode();
-        if(code==404 || code == 204){
-            adicionar(APP_REGISTRADO,true);
-            Log.i("REGISTRO","app ,setado true");
-            if(code == 204){
-                adicionar(APP_COMERCIAL,true);
-                Log.i("REGISTRO","Comercial setado true");
-            }
-        }
+        registro.verificarRegistro(APP_COMERCIAL,preferences1.getString(APP_CHAVE, "defaultStringIfNothingFound"));
+        entity = registro.getEntity();
     }
     public String gerarSerial(){
         SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyHHmmss");

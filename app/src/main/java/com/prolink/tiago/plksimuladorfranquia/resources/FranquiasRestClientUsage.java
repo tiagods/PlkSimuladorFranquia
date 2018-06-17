@@ -42,7 +42,7 @@ public class FranquiasRestClientUsage extends RestClient{
             url="/"+dateFormat.format(calendar.getTime())+"/periodo";
         }
         Log.v("PERIODO",url);
-        get("franquias", null, new JsonHttpResponseHandler() {
+        get(API_FRANQUIAS, null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
             }
