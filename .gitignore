@@ -8,6 +8,9 @@
 # Java class files
 *.class
 
+#Secutiry files
+RestClient.java
+
 # Generated files
 bin/
 gen/
