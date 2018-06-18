@@ -34,16 +34,13 @@ public class ContatoRestClientUsage extends RestClient{
                     try {
                         setPost(context, c);
                     } catch (JSONException e) {
-                        Log.e("JSONException", e.getMessage());
                     } catch (UnsupportedEncodingException e) {
-                        Log.e("UnsupportedEncoding", e.getMessage());
                     }
                 }
             }
         };
         mainHandler.post(runnable);
     }
-
     public void setPost(final Context context, final Contato contato) throws JSONException,UnsupportedEncodingException{
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("nome", contato.getNome());
@@ -52,8 +49,7 @@ public class ContatoRestClientUsage extends RestClient{
         jsonObject.put("contatoTipo", "SONDAGEM");
         StringEntity entity = new StringEntity(jsonObject.toString());
         entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
-
-        post(context, this.API_CONTATO, entity, "application/json", new AsyncHttpResponseHandler() {
+        post(context, API_CONTATO, entity, "application/json", new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 if (statusCode == 201) {//status created
@@ -72,29 +68,6 @@ public class ContatoRestClientUsage extends RestClient{
             }
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-            }
-        });
-    }
-    public void getPublic(Long id) throws JSONException,UnsupportedEncodingException{
-        String url = "";
-        if(id!=null) url = "/"+id;
-
-        get(this.API_CONTATO+url, null, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-
-            }
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray jsonArray) {
-                try {
-                    JSONArray array = jsonArray;
-                    for (int i = 0; i < array.length(); i++) {
-                        JSONObject jsonObject = array.getJSONObject(i);
-                        Log.i("JSONResult", jsonObject.getString("nome"));
-                    }
-                }catch (JSONException e){
-                    Log.e("JSONException",e.getMessage());
-                }
             }
         });
     }

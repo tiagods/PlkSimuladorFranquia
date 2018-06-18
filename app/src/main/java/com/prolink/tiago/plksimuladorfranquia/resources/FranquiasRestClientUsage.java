@@ -41,7 +41,6 @@ public class FranquiasRestClientUsage extends RestClient{
             calendar.add(Calendar.HOUR,-1);
             url="/"+dateFormat.format(calendar.getTime())+"/periodo";
         }
-        Log.v("PERIODO",url);
         get(API_FRANQUIAS, null, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -71,7 +70,7 @@ public class FranquiasRestClientUsage extends RestClient{
                         for(int j=0; j<arrayPack.length(); j++){
                             JSONObject jsonOb2 = arrayPack.getJSONObject(j);
                             FranquiaPacote pacote = new FranquiaPacote();
-                            pacote.setId(jsonOb2.getLong("id"));;
+                            pacote.setId(jsonOb2.getLong("id"));
                             pacote.setNome(jsonOb2.getString("nome"));
                             pacote.setCusto(jsonOb2.getDouble("custo"));
                             pacote.setInvestimento(jsonOb2.getDouble("investimento"));
@@ -87,13 +86,10 @@ public class FranquiasRestClientUsage extends RestClient{
                         franquias.add(franquia);
                     }
                     for(Franquia franquia : franquias){
-                        Log.v("FRANQUIAREST", new SimpleDateFormat("dd//MM/yyyy HH:mm:ss").format(franquia.getLastUpdate().getTime()));
-
                         FranquiaDAO franquiaDAO = new FranquiaDAO(context);
                         franquiaDAO.cadastrar(franquia);
                     }
                 }catch (JSONException e){
-                    Log.e("JSONException",e.getMessage());
                 }
             }
         });

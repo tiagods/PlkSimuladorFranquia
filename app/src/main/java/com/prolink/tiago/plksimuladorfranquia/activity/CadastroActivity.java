@@ -46,18 +46,18 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
 
         String mensagem  = "Os seguintes campos são obrigatórios\n";
         boolean exibirErro = false;
-//        if(!validarNome(nome.getText().toString())){
-//            exibirErro=true;
-//            mensagem+="Nome vazio\n";
-//        }
-//        if(!validarTelefone(telefone.getText().toString())){
-//            exibirErro=true;
-//            mensagem+="Telefone vazio ou invalido\n";
-//        }
-//        if(!validarEmail(email.getText().toString())){
-//            exibirErro=true;
-//            mensagem+="Email vazio ou invalido\n";
-//        }
+        if(!validarNome(nome.getText().toString())){
+            exibirErro=true;
+            mensagem+="Nome vazio\n";
+        }
+        if(!validarTelefone(telefone.getText().toString())){
+            exibirErro=true;
+            mensagem+="Telefone vazio ou invalido\n";
+        }
+        if(!validarEmail(email.getText().toString())){
+            exibirErro=true;
+            mensagem+="Email vazio ou invalido\n";
+        }
         if(exibirErro){
             //Cria o gerador do AlertDialog
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -65,12 +65,6 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
             builder.setTitle("Erro no Campo informado");
             //define a mensagem
             builder.setMessage(mensagem);
-            //define um botão como positivo
-            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface arg0, int arg1) {
-                    Toast.makeText(CadastroActivity.this, "Ok=" + arg1, Toast.LENGTH_SHORT).show();
-                }
-            });
             //cria o AlertDialog
             AlertDialog alerta = builder.create();
             alerta.show();
@@ -107,11 +101,11 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private boolean validarNome(String nome){
-        return !nome.trim().equals("");
+        return nome.trim().length()>0;
     }
 
     private boolean validarTelefone(String telefone){
-        return !telefone.trim().equals("");
+        return telefone.trim().length()>0;
     }
 
 }

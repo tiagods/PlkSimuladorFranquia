@@ -27,11 +27,6 @@ public class FranquiaEscolhaActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_franquia);
 
-        Contato c = (Contato)getIntent().getSerializableExtra("contato");
-        if(c!=null)
-            Log.v("MYAPP","Recenbendo objeto cadastrado= "+this.getClass().getSimpleName()+"\t"+c.getNome()+"\t "+c.getTelefone()+"\t "+c.getEmail());
-
-
         Spinner mySpinner = (Spinner)findViewById(R.id.spinner);
 
         FranquiaDAO franquiaDAO = new FranquiaDAO(this);

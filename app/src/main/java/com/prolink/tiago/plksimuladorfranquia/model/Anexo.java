@@ -2,6 +2,8 @@ package com.prolink.tiago.plksimuladorfranquia.model;
 
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.NumberFormat;
 import java.util.Locale;
 
@@ -37,6 +39,8 @@ public class Anexo implements Serializable{
     private double valorFinal = 0.00;
     private double aliquota;
     private double descontoRecolhimento = 0.00;
+    private double aliquotaFinal=0.00;
+
     public double getValorInicial() {
         return valorInicial;
     }
@@ -81,7 +85,21 @@ public class Anexo implements Serializable{
         return (faturamento >= valorInicial && faturamento<=valorFinal);
     }
     public String getValorImposto(double faturamento){
-        return nf.format((faturamento*aliquota)/100);
+        return nf.format((faturamento*aliquotaFinal)/100);
+    }
+    public void calcularAliquota(double faturamento){
+        double faturamentoAnual = 12 * faturamento;
+        if(faturamentoAnual>180000.00){
+            double alFn = (faturamentoAnual*aliquota)/100;
+            double valor = (alFn-descontoRecolhimento)/faturamentoAnual;
+            aliquotaFinal = (valor*100);
+        }
+        else
+            aliquotaFinal = aliquota;
+    }
+
+    public double getAliquotaFinal() {
+        return new BigDecimal(aliquotaFinal).setScale(2, RoundingMode.HALF_UP).doubleValue();
     }
 
     @Override

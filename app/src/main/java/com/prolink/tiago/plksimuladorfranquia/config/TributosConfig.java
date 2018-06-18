@@ -89,17 +89,18 @@ public class TributosConfig {
         anexoList.add(new Anexo(Anexo.Enquadramento.ANEXO5, linha6i, linha6f, 30.50, 540000.00));
 
 
-        lucroPresumido.add(new LucroPresumido(TipoServico.COMERCIO,3,0.65,1.20,1.08));
-        lucroPresumido.add(new LucroPresumido(TipoServico.SERVICO,3,0.65,4.8,2.88));
+        lucroPresumido.add(new LucroPresumido(TipoServico.COMERCIO,0,3,0.65,1.20,1.08));
+        lucroPresumido.add(new LucroPresumido(TipoServico.SERVICO,5,3,0.65,4.8,2.88));
     }
 
     public Anexo getAnexo(Faturamento faturamento) {
+        double faturamentoFinal = faturamento.getFaturamento()*12;
         for(Anexo anexo : this.anexoList){
 //            if(anexo.estaDentroDoLimite(faturamento)) newAnexo.add(anexo);
-            if(anexo.estaDentroDoLimite(faturamento.getFaturamento()) && anexo.getEnquadramento().equals(Anexo.Enquadramento.ANEXO1)
+            if(anexo.estaDentroDoLimite(faturamentoFinal) && anexo.getEnquadramento().equals(Anexo.Enquadramento.ANEXO1)
                     && faturamento.getTipo().equals(TipoServico.COMERCIO))
                 return anexo;
-            else if(anexo.estaDentroDoLimite(faturamento.getFaturamento()) && anexo.getEnquadramento().equals(Anexo.Enquadramento.ANEXO3)
+            else if(anexo.estaDentroDoLimite(faturamentoFinal) && anexo.getEnquadramento().equals(Anexo.Enquadramento.ANEXO3)
                     && faturamento.getTipo().equals(TipoServico.SERVICO))
                 return anexo;
         }

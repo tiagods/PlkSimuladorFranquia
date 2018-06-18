@@ -30,23 +30,22 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/pnTabelas"
+            android:id="@+id/pnFranquia"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="152dp"
+            android:layout_gravity="center_horizontal"
             android:layout_marginBottom="20dp"
-            android:orientation="vertical"><![CDATA[
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            ]]>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
 
             <TableLayout
                 android:id="@+id/tbFraquia"
-                android:layout_width="match_parent"
+                android:layout_width="350dp"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="20dp"
                 android:baselineAligned="true"
@@ -75,13 +74,13 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:textSize="18sp" />
 
                     <TextView
-                        android:layout_width="200dp"
+                        android:layout_width="350dp"
                         android:layout_height="wrap_content"
                         android:background="@color/colorTableBlue"
                         android:text="Valor"
@@ -180,9 +179,29 @@
                     android:background="#FFFFFF" />
             </TableLayout>
 
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pnSimples"
+            android:layout_width="match_parent"
+            android:layout_height="143dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
             <TableLayout
                 android:id="@+id/tbSimples"
-                android:layout_width="match_parent"
+                android:layout_width="350dp"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="20dp"
                 android:baselineAligned="false"
@@ -317,9 +336,29 @@
                     android:background="#FFFFFF" />
             </TableLayout>
 
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pnLP"
+            android:layout_width="match_parent"
+            android:layout_height="224dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
             <TableLayout
                 android:id="@+id/tbPresumido"
-                android:layout_width="match_parent"
+                android:layout_width="350dp"
                 android:layout_height="match_parent"
                 android:baselineAligned="false"
                 android:shrinkColumns="1,2,3">
@@ -340,6 +379,10 @@
                         android:textStyle="bold" />
 
                 </TableRow>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp" />
 
                 <TableRow
                     android:layout_width="match_parent"
@@ -385,12 +428,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@color/colorTable399c91"
-                        android:text="Cofins"
+                        android:text="ISS"
                         android:textColor="#FFFFFF"
                         android:textSize="18sp" />
 
                     <TextView
-                        android:id="@+id/txLPTaxaCofins"
+                        android:id="@+id/txLPTaxaIss"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@color/colorTable399c91"
@@ -400,7 +443,7 @@
                         android:textSize="18sp" />
 
                     <TextView
-                        android:id="@+id/txLPValorCofins"
+                        android:id="@+id/txLPValorIss"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:background="@color/colorTable399c91"
@@ -422,8 +465,42 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="Cofins"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/txLPTaxaCofins"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textAlignment="center"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/txLPValorCofins"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textAlignment="center"
+                        android:textSize="18sp" />
+
+                </TableRow>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#FFFFFF" />
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_span="1"
+                        android:background="@color/colorTable399c91"
                         android:text="Pis"
+                        android:textColor="#FFFFFF"
                         android:textSize="18sp" />
 
                     <TextView
@@ -431,8 +508,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_span="1"
+                        android:background="@color/colorTable399c91"
                         android:text=""
                         android:textAlignment="center"
+                        android:textColor="#FFFFFF"
                         android:textSize="18sp" />
 
                     <TextView
@@ -440,7 +519,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_span="1"
+                        android:background="@color/colorTable399c91"
                         android:textAlignment="center"
+                        android:textColor="#FFFFFF"
                         android:textSize="18sp" />
 
                 </TableRow>
@@ -457,9 +538,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@color/colorTable399c91"
                         android:text="Irpj"
-                        android:textColor="#FFFFFF"
                         android:textSize="18sp" />
 
                     <TextView
@@ -467,18 +546,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_span="1"
-                        android:background="@color/colorTable399c91"
                         android:textAlignment="center"
-                        android:textColor="#FFFFFF"
                         android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/txLPValorIrpj"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@color/colorTable399c91"
                         android:textAlignment="center"
-                        android:textColor="#FFFFFF"
                         android:textSize="18sp" />
 
                 </TableRow>
@@ -490,13 +565,15 @@
                     android:background="#FFFFFF" />
 
                 <TableRow
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:background="@color/colorTable399c91"
                         android:text="Csll"
+                        android:textColor="#FFFFFF"
                         android:textSize="18sp" />
 
                     <TextView
@@ -504,21 +581,24 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_span="1"
+                        android:background="@color/colorTable399c91"
                         android:textAlignment="center"
+                        android:textColor="#FFFFFF"
                         android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/txLPValorCsll"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:background="@color/colorTable399c91"
                         android:textAlignment="center"
+                        android:textColor="#FFFFFF"
                         android:textSize="18sp" />
 
                 </TableRow>
 
                 <View
-                    android:id="@+id/txLPValorTotal"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="1dp"
                     android:background="#FFFFFF" />
 
@@ -529,9 +609,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@color/colorTable399c91"
                         android:text="Total"
-                        android:textColor="#FFFFFF"
                         android:textSize="18sp" />
 
                     <TextView
@@ -539,18 +617,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_span="1"
-                        android:background="@color/colorTable399c91"
                         android:textAlignment="center"
-                        android:textColor="#FFFFFF"
                         android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/txLPTotal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@color/colorTable399c91"
                         android:textAlignment="center"
-                        android:textColor="#FFFFFF"
                         android:textSize="18sp" />
 
                 </TableRow>
@@ -560,6 +634,11 @@
                     android:layout_height="1dp"
                     android:background="#FFFFFF" />
             </TableLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
         </LinearLayout>
 
         <LinearLayout
@@ -567,46 +646,33 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/txResultado1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:layout_weight="1"
                 android:textSize="18sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/txResultado2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
                 android:layout_weight="1"
                 android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/txResultado3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="18sp" />
         </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="20dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/txResultado3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="18sp" />
-
-    </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -614,13 +680,13 @@
             android:orientation="horizontal">
 
             <Space
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
             <com.beardedhen.androidbootstrap.BootstrapButton
                 android:id="@+id/buttonRefazer"
-                android:layout_width="460dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Refazer Simulação"
@@ -635,7 +701,7 @@
                 app:showOutline="false" />
 
             <Space
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
@@ -674,6 +740,23 @@
                 android:layout_weight="1" />
 
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Copyrigth © 2018 - Prolink Contabil \n (11) 3107-4505"
+                android:textAlignment="center"
+                android:textSize="18sp" />
         </LinearLayout>
 
     </LinearLayout>

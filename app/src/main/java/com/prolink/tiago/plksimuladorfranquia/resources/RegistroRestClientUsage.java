@@ -46,7 +46,6 @@ public class RegistroRestClientUsage extends RestClient{
                     editor.apply();
                     entity = CadastroActivity.class;
                 }
-                Log.i("STATUS-OBJECT",statusCode+"");
             }
         });
     }

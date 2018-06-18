@@ -1,6 +1,8 @@
 package com.prolink.tiago.plksimuladorfranquia.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.NumberFormat;
 import java.util.Locale;
 
@@ -37,8 +39,9 @@ public class LucroPresumido implements Serializable {
 
     private TipoServico tipo = TipoServico.SERVICO;
 
-    public LucroPresumido(TipoServico tipo, double cofins, double pis, double irpj, double csll){
+    public LucroPresumido(TipoServico tipo, double iss, double cofins, double pis, double irpj, double csll){
         this.tipo=tipo;
+        this.iss = iss;
         this.cofins=cofins;
         this.pis=pis;
         this.irpj=irpj;
@@ -223,9 +226,9 @@ public class LucroPresumido implements Serializable {
         this.totalInss = (faturamento * inss)/100;
         this.totalGps = (faturamento * gps)/100;
         this.totalIrrf = (faturamento * irrf)/100;
-
-        this.totalImposto = totalIcms+totalIss+totalCofins+
+        this.totalImposto = totalIss+totalIcms+totalCofins+
                 totalPis+totalIrpj+totalCsll+totalInss+totalGps+totalIrrf;
         this.imposto = (totalImposto/faturamento)*100;
+        this.imposto=new BigDecimal(this.imposto).setScale(2, RoundingMode.HALF_UP).doubleValue();
     }
 }
