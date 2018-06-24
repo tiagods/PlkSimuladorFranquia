@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
-    tools:context="com.prolink.tiago.plksimuladorfranquia.activity.CadastroActivity"
+    tools:context="com.prolink.tiago.prolinkfranquias2018.activity.CadastroActivity"
     >
     <LinearLayout
         android:layout_width="match_parent"
@@ -111,23 +111,23 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="68dp"
             android:layout_marginBottom="10dp"
             android:orientation="horizontal">
 
             <Space
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
 
             <com.beardedhen.androidbootstrap.BootstrapButton
                 android:id="@+id/button"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="@string/button_avancar"
                 app:bootstrapBrand="success"
-                app:bootstrapSize="lg"
+                app:bootstrapSize="xl"
                 app:buttonMode="regular"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -137,7 +137,7 @@
                 app:showOutline="false" />
 
             <Space
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
         </LinearLayout>

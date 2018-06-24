@@ -7,7 +7,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_margin="10dp"
-        tools:context="com.prolink.tiago.plksimuladorfranquia.activity.FranquiaDetalhesActivity">
+        tools:context="com.prolink.tiago.prolinkfranquias2018.activity.FranquiaDetalhesActivity">
 
 
     >

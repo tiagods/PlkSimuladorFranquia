@@ -30,4 +30,5 @@
         <item>Franquia 3</item>
         <item>Franquia 4</item>
     </string-array>
+    <string name="title_activity_settings">Settings</string>
 </resources>
