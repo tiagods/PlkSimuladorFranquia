@@ -50,7 +50,7 @@
                 android:layout_weight="1"
                 android:minWidth="120dp"
                 android:scrollbarSize="35dp"
-                android:textSize="24sp" />
+                android:textSize="30sp" />
 
         </LinearLayout>
 

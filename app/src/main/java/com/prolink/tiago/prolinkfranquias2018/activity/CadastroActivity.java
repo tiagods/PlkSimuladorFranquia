@@ -44,19 +44,15 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View view) {
 
-        String mensagem  = "Os seguintes campos são obrigatórios\n";
+        String mensagem  = "Os seguintes campos são obrigatórios ou estao incorretos\n";
         boolean exibirErro = false;
         if(!validarNome(nome.getText().toString())){
             exibirErro=true;
             mensagem+="Nome\n";
         }
-        if(!validarTelefone(telefone.getText().toString())){
+        if(!validarTelefone(telefone.getText().toString()) && !validarEmail(email.getText().toString())){
             exibirErro=true;
-            mensagem+="Telefone\n";
-        }
-        if(!validarEmail(email.getText().toString())){
-            exibirErro=true;
-            mensagem+="Email\n";
+            mensagem+="E-Mail ou Telefone\n";
         }
         if(exibirErro){
             //Cria o gerador do AlertDialog
